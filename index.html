@@ -6,30 +6,16 @@
     <title>Project OED - 오이디푸스적 비극의 인디게임</title>
     <meta name="description" content="Project OED - 추리, 미스터리, 어드벤처 장르의 인디 게임" />
     <meta name="keywords" content="인디게임, 미스터리 게임, 추리 게임, 어드벤처 게임, 오이디푸스, 크툴루, 호러, Project OED" />
-    <!-- Neo둥근모 폰트 -->
-    <link rel="preload" as="style" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm/style.css" />
-    <link rel="preload" as="style" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm_code/style.css" />
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm/style.css" />
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm_code/style.css" />
-    <!-- DotGothic16 폰트 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <!-- 갈무리체 폰트 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css" />
     <!-- 아이콘 폰트 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        @font-face {
-            font-family: 'NeoDunggeunmo';
-            src: url('//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm/neodgm.woff2') format('woff2'),
-                 url('//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm/neodgm.woff') format('woff');
-            font-display: swap;
-        }
-
         :root {
-            --primary-font: 'NeoDunggeunmo', 'Neo둥근모', monospace;
+            --primary-font: 'Galmuri9', 'Galmuri11', monospace;
             --primary-color: #e0e0e0;
             --secondary-color: #a0a0a0;
             --accent-color: #ff3e3e;
@@ -44,8 +30,9 @@
         body, button, input, select, textarea {
             font-family: var(--primary-font);
         }
-        html[lang="ko"] { font-family: 'Neo둥근모', 'Neo둥근모 Code', serif; }
-        html[lang="en"], html[lang="ja"] { font-family: 'DotGothic16', monospace; }
+        html[lang="ko"] { font-family: var(--primary-font); }
+        html[lang="en"] { font-family: var(--primary-font); }
+        html[lang="ja"] { font-family: var(--primary-font); }
         body {
             line-height: 1.6;
             color: #e0e0e0;
@@ -190,12 +177,12 @@
         html[lang="en"],
         .language-option[data-lang-code="en"],
         .current-lang[data-lang="en"] {
-            font-family: 'DotGothic16', monospace !important;
+            font-family: var(--primary-font) !important;
         }
         html[lang="ja"],
         .language-option[data-lang-code="ja"],
         .current-lang[data-lang="ja"] {
-            font-family: 'DotGothic16', monospace !important;
+            font-family: var(--primary-font) !important;
         }
         .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
         /* Hero */
