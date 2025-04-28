@@ -179,41 +179,52 @@
             margin-right: 0.75rem;
         }
         /* 언어별 폰트 */
+        html[lang="ko"],
         .language-option[data-lang-code="ko"],
+        .current-lang[data-lang="ko"] {
+            font-family: var(--primary-font) !important;
+        }
+        html[lang="en"],
         .language-option[data-lang-code="en"],
+        .current-lang[data-lang="en"] {
+            font-family: 'DotGothic16', monospace !important;
+        }
+        html[lang="ja"],
         .language-option[data-lang-code="ja"],
-        .current-lang[data-lang="ko"],
-        .current-lang[data-lang="en"],
         .current-lang[data-lang="ja"] {
-            font-family: var(--primary-font);
+            font-family: 'DotGothic16', monospace !important;
         }
         .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
         /* Hero */
         .hero {
+            position: relative;
+            width: 100%;
             height: 100vh;
             display: flex;
             align-items: center;
-            position: relative;
+            justify-content: center;
+            text-align: center;
             overflow: hidden;
-            padding-top: 60px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+            background-size: cover;
+            background-position: center;
+            color: var(--text-color);
         }
 
         .hero::before {
-            content: "";
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('https://github.com/birdsol1122/OEDwebsite/blob/main/eden_n13_13831_wide_cinematic_matte-painting_ruined_neo-Byzanti_633b17cf-0528-467b-b27a-71a122dbffcc.png?raw=true');
+            background-image: url('assets/images/background.jpg');
             background-size: cover;
             background-position: center;
-            z-index: -2;
-            filter: brightness(0.6) contrast(1.2) saturate(0.8);
-            animation: subtle-zoom 30s ease-in-out infinite alternate;
+            filter: brightness(0.7) saturate(0.8);
+            z-index: -1;
+            animation: subtle-zoom 20s infinite alternate;
         }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(to bottom, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 3px, rgba(0, 0, 0, 0.03) 3px); pointer-events: none; z-index: -1; opacity: 0.4; }
         .hero-content { max-width: 800px; color: white; text-align: center; position: relative; z-index: 1; }
         .hero-logo { height: 120px; margin-bottom: 2rem; filter: drop-shadow(0 0 10px rgba(255, 62, 62, 0.7)); }
         .hero h1 {
