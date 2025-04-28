@@ -477,7 +477,7 @@
         html[lang="ja"] [data-lang="ko"], html[lang="ja"] [data-lang="en"] { display: none; }
         html[lang="ko"] [data-lang="ko"] { display: block; }
         html[lang="ko"] [data-lang="en"], html[lang="ko"] [data-lang="ja"] { display: none; }
-        /* 재생 버튼 픽셀아트 스타일 */
+        /* 재생 버튼 심플 스타일 */
         .cassette-btn {
             position: fixed;
             bottom: 30px;
@@ -486,14 +486,32 @@
             background: none;
             border: none;
             cursor: pointer;
-            width: 50px;
-            height: 50px;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
+            opacity: 0.7;
+            transition: all 0.3s ease;
         }
+
+        .cassette-btn i {
+            font-size: 2.5rem;
+            color: #d64545;  /* 빈티지한 레드 컬러로 변경 */
+            text-shadow: 0 0 15px rgba(214, 69, 69, 0.5);
+            transition: all 0.3s ease;
+            filter: saturate(85%) brightness(95%);  /* 빈티지한 느낌을 위한 필터 추가 */
+        }
+
+        .cassette-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .cassette-btn:hover i {
+            text-shadow: 0 0 20px rgba(214, 69, 69, 0.8);
+            filter: saturate(100%) brightness(100%);
+        }
+
+        .cassette-btn .fa-play { display: block; }
+        .cassette-btn .fa-pause { display: none; }
+        .cassette-btn.playing .fa-play { display: none; }
+        .cassette-btn.playing .fa-pause { display: block; }
 
         .pixel-btn {
             width: 40px;
@@ -693,7 +711,8 @@
     <!-- VHS 노이즈 SVG 오버레이 제거 -->
     <!-- 재생 버튼 -->
     <button class="cassette-btn" id="cassetteBtn" title="배경음악 재생/정지">
-        <div class="pixel-btn"></div>
+        <i class="fas fa-play"></i>
+        <i class="fas fa-pause"></i>
     </button>
     <!-- 음악 플레이어 -->
     <audio id="bgm" src="https://github.com/birdsol1122/OEDwebsite/blob/main/0428.MP3?raw=true" loop></audio>
