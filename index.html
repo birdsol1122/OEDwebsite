@@ -103,10 +103,16 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 0;
+            position: relative;
         }
         .logo { display: flex; align-items: center; font-weight: bold; font-size: 1.5rem; text-decoration: none; color: var(--primary-color); }
         .logo-text { text-shadow: var(--text-glow); letter-spacing: 1px; }
-        .nav-links { display: flex; list-style: none; }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
         .nav-links li { margin-left: 2rem; }
         .nav-link { color: var(--primary-color); text-decoration: none; font-weight: 500; transition: color 0.3s, text-shadow 0.3s; position: relative; letter-spacing: 1px; }
         .nav-link:hover { color: var(--accent-color); text-shadow: 0 0 8px rgba(255, 62, 62, 0.7); }
@@ -184,7 +190,16 @@
         .current-lang[data-lang="ja"] {
             font-family: var(--primary-font) !important;
         }
-        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1000;
+        }
         /* Hero */
         .hero {
             position: relative;
@@ -424,15 +439,28 @@
                 margin-top: 0.2rem;
             }
             
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                order: 3;
+                z-index: 1001;
+            }
+
             .nav-links {
+                display: none;
                 position: fixed;
                 top: 60px;
                 left: 0;
                 width: 100%;
+                height: auto;
                 background-color: rgba(18, 18, 18, 0.95);
-                padding: 1rem 0;
                 flex-direction: column;
                 align-items: center;
+                padding: 1rem 0;
+                z-index: 1000;
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
             }
@@ -450,16 +478,13 @@
             
             .nav-link {
                 display: block;
-                padding: 0.5rem;
-                font-size: 0.9rem;
+                padding: 0.5rem 0;
+                font-size: 1.1rem;
             }
             
             .language-selector {
                 order: 2;
-                margin: 0 0.5rem;
-                position: relative;
-                display: flex;
-                align-items: center;
+                margin-right: 1rem;
             }
             
             .language-btn {
@@ -870,7 +895,7 @@
                     <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo.png?raw=true" alt="Project OED Logo" style="height: 40px; margin-right: 10px; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));">
                     <span class="logo-text">Project OED</span>
                 </a>
-                <button class="mobile-menu-btn">
+                <button class="mobile-menu-btn" aria-label="메뉴 열기">
                     <i class="fas fa-bars"></i>
                 </button>
                 <ul class="nav-links">
@@ -890,22 +915,20 @@
                         <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="nav-link" data-lang="en">Recruitment</a>
                         <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="nav-link" data-lang="ja">採用情報</a>
                     </li>
-                    <li>
-                        <div class="language-selector">
-                            <button class="language-btn">
-                                <span class="current-lang" data-lang="ko">한국어</span>
-                                <span class="current-lang" data-lang="en">English</span>
-                                <span class="current-lang" data-lang="ja">日本語</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="language-dropdown">
-                                <div class="language-option" data-lang-code="ko"><span class="language-flag">🇰🇷</span> 한국어</div>
-                                <div class="language-option" data-lang-code="en"><span class="language-flag">🇺🇸</span> English</div>
-                                <div class="language-option" data-lang-code="ja"><span class="language-flag">🇯🇵</span> 日本語</div>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
+                <div class="language-selector">
+                    <button class="language-btn">
+                        <span class="current-lang" data-lang="ko">한국어</span>
+                        <span class="current-lang" data-lang="en">English</span>
+                        <span class="current-lang" data-lang="ja">日本語</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-dropdown">
+                        <div class="language-option" data-lang-code="ko"><span class="language-flag">🇰🇷</span> 한국어</div>
+                        <div class="language-option" data-lang-code="en"><span class="language-flag">🇺🇸</span> English</div>
+                        <div class="language-option" data-lang-code="ja"><span class="language-flag">🇯🇵</span> 日本語</div>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -1411,6 +1434,54 @@
 
         // 주기적으로 스캔라인 토글
         setInterval(toggleScanlines, 10000); // 10초마다 토글
+
+        // 모바일 메뉴 관련 스크립트
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            const menuIcon = mobileMenuBtn.querySelector('i');
+            
+            // 메뉴 토글 함수
+            function toggleMenu() {
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                    mobileMenuBtn.setAttribute('aria-label', '메뉴 닫기');
+                } else {
+                    menuIcon.classList.add('fa-bars');
+                    menuIcon.classList.remove('fa-times');
+                    mobileMenuBtn.setAttribute('aria-label', '메뉴 열기');
+                }
+            }
+
+            // 메뉴 버튼 클릭 이벤트
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMenu();
+            });
+
+            // 메뉴 항목 클릭시 메뉴 닫기
+            navLinks.addEventListener('click', function(e) {
+                if (e.target.classList.contains('nav-link')) {
+                    toggleMenu();
+                }
+            });
+
+            // 화면 외부 클릭시 메뉴 닫기
+            document.addEventListener('click', function(e) {
+                if (navLinks.classList.contains('active') && !e.target.closest('.nav-links') && !e.target.closest('.mobile-menu-btn')) {
+                    toggleMenu();
+                }
+            });
+
+            // 화면 크기 변경시 메뉴 상태 초기화
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
     </script>
 </body>
 </html>
