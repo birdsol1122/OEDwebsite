@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ko" class="lang-ko">
 <head>
   <meta charset="UTF-8" />
@@ -10,13 +9,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=DotGothic16&family=Pixelify+Sans:wght@400;700&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=DotGothic16&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet" />
   <!-- Icons -->
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
 
   <style>
     /* ---------------- Root Palette ---------------- */
@@ -286,4 +281,247 @@
       border: 2px solid var(--accent);
       color: var(--accent);
     }
-    .btn-outline
+    .btn-outline:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ---------------- Sections ---------------- */
+
+/* === ABOUT === */
+#about .grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+  align-items:center;
+  text-align:left;
+}
+#about img{
+  filter:grayscale(30%) contrast(1.2) brightness(.85);
+}
+.feature{
+  display:flex;
+  margin-bottom:1.2rem;
+  align-items:center;
+}
+.feature i{
+  width:40px;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,62,62,.1);
+  border:1px solid var(--accent);
+  color:var(--accent);
+  margin-right:1rem;
+}
+
+/* === TEAM === */
+#team{
+  background:var(--bg-card);
+}
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:2rem;
+}
+.member{
+  background:rgba(26,26,26,.8);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  transition:transform .3s;
+}
+.member:hover{transform:translateY(-6px);}
+.member img{
+  height:240px;
+  object-fit:contain;
+  padding:2rem;
+  margin:auto;
+}
+.member-info{padding:1.5rem;}
+.member-role{
+  color:var(--accent);
+  font-weight:600;
+  margin-bottom:.7rem;
+  display:block;
+}
+
+/* === COMMUNITY === */
+#community{
+  background:var(--bg-dark);
+}
+.comm-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.5rem;
+  justify-content:center;
+}
+.comm-card{
+  width:230px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  padding:1.5rem;
+  text-align:center;
+  transition:transform .3s;
+}
+.comm-card:hover{transform:translateY(-5px);}
+
+/* === FOOTER === */
+footer{
+  background:#0a0a0a;
+  color:var(--secondary);
+  padding:3rem 0;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:2rem;
+}
+.footer-links{list-style:none;}
+.footer-links a{
+  color:var(--secondary);
+  text-decoration:none;
+}
+.footer-links a:hover{color:var(--accent);}
+.copyright{
+  text-align:center;
+  margin-top:2rem;
+  font-size:.9rem;
+}
+
+/* ===== Responsive tweaks (섹션 전용) ===== */
+@media(max-width:992px){
+  #about .grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  #about .grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:576px){
+  .team-grid{grid-template-columns:1fr;}
+}
+
+/* ===== Responsive tweaks (섹션 전용) ===== */
+@media(max-width:992px){
+  #about .grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  #about .grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:576px){
+  .team-grid{grid-template-columns:1fr;}
+}
+
+  <!-- ===== ABOUT -->
+<section id="about">
+  <div class="container">
+    <h2 class="vhs-shift glitch" data-text="About Project">About Project</h2>
+    <div class="grid">
+      <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/santiago-avila-caro-JMcrYyCjAog-unsplash.jpg?raw=true"
+           alt="Project screenshot">
+      <div>
+        <p>오이디푸스적 비극과 크툴루 신화가 만나는 독특한 미스터리 어드벤처.</p>
+
+        <div class="feature"><i class="fas fa-search"></i>추리‧단서 수집</div>
+        <div class="feature"><i class="fas fa-book"></i>신화적 세계관</div>
+        <div class="feature"><i class="fas fa-ghost"></i>러브크래프트풍 공포</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TEAM -->
+<section id="team">
+  <div class="container">
+    <h2 class="vhs-shift glitch" data-text="Team">Team</h2>
+    <div class="team-grid">
+      <!-- 팀원 카드 예시 -->
+      <div class="member">
+        <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="member">
+        <div class="member-info">
+          <h3 class="glitch">박이야기</h3>
+          <span class="member-role">Lead Writer</span>
+          <p class="member-bio">Greek tragedy × Cthulhu mythos 스토리텔링.</p>
+        </div>
+      </div>
+      <!-- 필요 만큼 반복 -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMUNITY -->
+<section id="community">
+  <div class="container">
+    <h2 class="vhs-shift glitch" data-text="Community">Community</h2>
+    <div class="comm-links">
+      <a class="comm-card" href="#"><i class="fab fa-discord fa-2x"></i><p>Discord</p></a>
+      <a class="comm-card" href="#"><i class="fab fa-twitter fa-2x"></i><p>Twitter</p></a>
+      <a class="comm-card" href="#"><i class="fab fa-instagram fa-2x"></i><p>Instagram</p></a>
+      <a class="comm-card" href="#"><i class="fab fa-youtube fa-2x"></i><p>YouTube</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER -->
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h3>Project OED</h3>
+      <p>미스터리 ‧ 호러 ‧ 어드벤처 인디게임<br>© 2025 Project OED</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <ul class="footer-links">
+      <li><a href="mailto:birdsol1122@gmail.com">Email</a></li>
+      <li><a href="https://birdsol1122.github.io/projectoed1122/" target="_blank">Recruit</a></li>
+    </ul>
+    <ul class="footer-links">
+      <li><a href="#">Twitter</a></li>
+      <li><a href="#">Discord</a></li>
+    </ul>
+  </div>
+  <p class="copyright">© 2025 Project OED. All rights reserved.</p>
+</footer>
+
+<!-- ===== JS -->
+<script>
+/* 모바일 메뉴 토글 */
+const mobileBtn = document.querySelector('.mobile-btn');
+const navLinks  = document.getElementById('navLinks');
+mobileBtn?.addEventListener('click',()=>navLinks.classList.toggle('show'));
+
+/* Glitch ON/OFF */
+const glitchBtn = document.getElementById('glitchToggle');
+glitchBtn?.addEventListener('click',()=>{
+  document.body.classList.toggle('glitch-off');
+  const off = document.body.classList.contains('glitch-off');
+  glitchBtn.textContent = off ? 'Glitch OFF' : 'Glitch ON';
+  localStorage.setItem('glitchDisabled',off?'1':'0');
+});
+if(localStorage.getItem('glitchDisabled')==='1'){
+  document.body.classList.add('glitch-off');
+  glitchBtn.textContent='Glitch OFF';
+}
+
+/* 언어 선택(예: ko/en/ja) */
+const langBtn = document.getElementById('langBtn');
+langBtn?.addEventListener('click',()=>{
+  const cur = document.documentElement.classList;
+  if(cur.contains('lang-ko'))      {cur.replace('lang-ko','lang-en');langBtn.textContent='English ▼';}
+  else if(cur.contains('lang-en')) {cur.replace('lang-en','lang-ja');langBtn.textContent='日本語 ▼';}
+  else                             {cur.replace('lang-ja','lang-ko');langBtn.textContent='한국어 ▼';}
+});
+
+/* Tape click sound on anchor nav */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',()=>{tapeClick.currentTime=0;tapeClick.play();});
+});
+</script>
+</body>
+</html>
