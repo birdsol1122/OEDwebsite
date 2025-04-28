@@ -579,6 +579,84 @@
             z-index: 9997;
             /* 여기에 배경 효과 등 추가 */
         }
+
+        /* 스캔라인 효과 */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9996;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.2) 0px,
+                rgba(0, 0, 0, 0.2) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            animation: scanline-move 10s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes scanline-move {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* 이미지 플리커 효과 */
+        .flicker {
+            animation: image-flicker 4s infinite;
+        }
+
+        @keyframes image-flicker {
+            0% { opacity: 1; }
+            5% { opacity: 0.8; }
+            10% { opacity: 1; }
+            15% { opacity: 0.9; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            85% { opacity: 0.8; }
+            90% { opacity: 1; }
+            95% { opacity: 0.9; }
+            100% { opacity: 1; }
+        }
+
+        /* 랜덤 글리치 효과 */
+        .random-glitch {
+            animation: random-glitch-effect 0.2s infinite;
+            animation-play-state: paused;
+        }
+
+        .random-glitch.active {
+            animation-play-state: running;
+        }
+
+        @keyframes random-glitch-effect {
+            0% { transform: translate(0); }
+            25% { transform: translate(-5px, 5px); filter: hue-rotate(90deg); }
+            50% { transform: translate(5px, -5px); filter: hue-rotate(-90deg); }
+            75% { transform: translate(-5px, -5px); filter: hue-rotate(180deg); }
+            100% { transform: translate(0); filter: hue-rotate(0); }
+        }
+
+        /* 호버 글리치 효과 강화 */
+        .glitch:hover {
+            animation: hover-glitch 0.3s infinite;
+            text-shadow: 
+                2px 0 var(--accent-color),
+                -2px 0 cyan;
+        }
+
+        @keyframes hover-glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
     </style>
 </head>
 <body>
@@ -1078,6 +1156,71 @@
                 }
             }, 250);
         }, { passive: true });
+
+        // 랜덤 글리치 효과
+        function applyRandomGlitch() {
+            const elements = document.querySelectorAll('.random-glitch');
+            elements.forEach(element => {
+                if (Math.random() < 0.01) { // 1% 확률로 글리치 발생
+                    element.classList.add('active');
+                    setTimeout(() => {
+                        element.classList.remove('active');
+                    }, 200);
+                }
+            });
+        }
+
+        // 주기적으로 랜덤 글리치 효과 적용
+        setInterval(applyRandomGlitch, 100);
+
+        // 언어 선택 및 상태 저장
+        languageOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang-code');
+                switchLanguage(lang);
+                languageDropdown.classList.remove('show');
+                
+                // 언어 선택 상태 저장
+                try {
+                    localStorage.setItem('preferredLanguage', lang);
+                } catch (e) {
+                    console.warn('LocalStorage is not available');
+                }
+            });
+        });
+
+        // 저장된 언어 설정 불러오기
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                const savedLang = localStorage.getItem('preferredLanguage');
+                if (savedLang) {
+                    switchLanguage(savedLang);
+                }
+            } catch (e) {
+                console.warn('LocalStorage is not available');
+            }
+
+            // 이미지에 플리커 효과 적용
+            document.querySelectorAll('.about-image img, .member-image img').forEach(img => {
+                img.classList.add('flicker');
+            });
+        });
+
+        // 스캔라인 효과 토글
+        let scanlinesEnabled = true;
+        const scanlines = document.querySelector('.scanlines');
+        
+        function toggleScanlines() {
+            if (scanlinesEnabled) {
+                scanlines.style.opacity = '0';
+            } else {
+                scanlines.style.opacity = '0.3';
+            }
+            scanlinesEnabled = !scanlinesEnabled;
+        }
+
+        // 주기적으로 스캔라인 토글
+        setInterval(toggleScanlines, 10000); // 10초마다 토글
     </script>
 </body>
 </html>
