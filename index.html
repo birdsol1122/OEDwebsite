@@ -477,7 +477,7 @@
         html[lang="ja"] [data-lang="ko"], html[lang="ja"] [data-lang="en"] { display: none; }
         html[lang="ko"] [data-lang="ko"] { display: block; }
         html[lang="ko"] [data-lang="en"], html[lang="ko"] [data-lang="ja"] { display: none; }
-        /* 재생 버튼 심플 스타일 */
+        /* 재생 버튼 픽셀아트 스타일 */
         .cassette-btn {
             position: fixed;
             bottom: 30px;
@@ -486,30 +486,70 @@
             background: none;
             border: none;
             cursor: pointer;
-            opacity: 0.7;
-            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
         }
 
-        .cassette-btn i {
-            font-size: 2.5rem;
-            color: #ff3e3e;
-            text-shadow: 0 0 15px rgba(255, 62, 62, 0.5);
-            transition: all 0.3s ease;
+        .pixel-btn {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            position: relative;
+            clip-path: polygon(
+                0% 0%, 12.5% 0%, 12.5% 12.5%, 25% 12.5%, 25% 0%, 
+                37.5% 0%, 37.5% 12.5%, 50% 12.5%, 50% 0%, 
+                62.5% 0%, 62.5% 12.5%, 75% 12.5%, 75% 0%, 
+                87.5% 0%, 87.5% 12.5%, 100% 12.5%, 100% 25%, 
+                87.5% 25%, 87.5% 37.5%, 100% 37.5%, 100% 50%, 
+                87.5% 50%, 87.5% 62.5%, 100% 62.5%, 100% 75%, 
+                87.5% 75%, 87.5% 87.5%, 100% 87.5%, 100% 100%, 
+                87.5% 100%, 75% 100%, 75% 87.5%, 62.5% 87.5%, 
+                62.5% 100%, 50% 100%, 50% 87.5%, 37.5% 87.5%, 
+                37.5% 100%, 25% 100%, 25% 87.5%, 12.5% 87.5%, 
+                12.5% 100%, 0% 100%, 0% 87.5%, 12.5% 87.5%, 
+                12.5% 75%, 0% 75%, 0% 62.5%, 12.5% 62.5%, 
+                12.5% 50%, 0% 50%, 0% 37.5%, 12.5% 37.5%, 
+                12.5% 25%, 0% 25%, 0% 12.5%, 12.5% 12.5%, 12.5% 0%
+            );
+            box-shadow: 0 0 10px rgba(255, 62, 62, 0.5);
+        }
+
+        .pixel-btn::before {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            background-color: var(--dark-bg);
+            clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+            transition: clip-path 0.3s ease;
+        }
+
+        .cassette-btn.playing .pixel-btn::before {
+            clip-path: polygon(0% 0%, 40% 0%, 40% 100%, 60% 100%, 60% 0%, 100% 0%, 100% 100%, 0% 100%);
         }
 
         .cassette-btn:hover {
-            opacity: 1;
             transform: scale(1.1);
         }
 
-        .cassette-btn:hover i {
-            text-shadow: 0 0 20px rgba(255, 62, 62, 0.8);
+        .cassette-btn:hover .pixel-btn {
+            box-shadow: 0 0 15px rgba(255, 62, 62, 0.8);
         }
 
-        .cassette-btn .fa-play { display: block; }
-        .cassette-btn .fa-pause { display: none; }
-        .cassette-btn.playing .fa-play { display: none; }
-        .cassette-btn.playing .fa-pause { display: block; }
+        @media (max-width: 768px) {
+            .cassette-btn {
+                bottom: 20px;
+                left: 20px;
+                transform: scale(0.9);
+            }
+        }
 
         /* 준비중 섹션 스타일 */
         .coming-soon {
@@ -653,8 +693,7 @@
     <!-- VHS 노이즈 SVG 오버레이 제거 -->
     <!-- 재생 버튼 -->
     <button class="cassette-btn" id="cassetteBtn" title="배경음악 재생/정지">
-        <i class="fas fa-play"></i>
-        <i class="fas fa-pause"></i>
+        <div class="pixel-btn"></div>
     </button>
     <!-- 음악 플레이어 -->
     <audio id="bgm" src="https://github.com/birdsol1122/OEDwebsite/blob/main/0428.MP3?raw=true" loop></audio>
