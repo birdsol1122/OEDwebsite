@@ -207,25 +207,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('/api/placeholder/1920/1080');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1920/1080');
             background-size: cover;
             background-position: center;
-            filter: brightness(0.7) contrast(1.2);
             z-index: -1;
         }
 
         .hero-content {
             max-width: 800px;
             color: white;
+            text-align: center;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
             line-height: 1.2;
-            font-family: 'Times New Roman', serif;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(200, 0, 0, 0.5);
         }
 
         .hero p {
@@ -371,49 +368,27 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            border: 1px solid rgba(150, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
 
         .team-member:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(200, 0, 0, 0.3);
-        }
-
-        .team-member::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .team-member:hover::after {
-            opacity: 1;
         }
 
         .member-image {
             width: 100%;
             height: 250px;
             overflow: hidden;
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.03);
         }
 
         .member-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(30%) brightness(0.8);
-            transition: filter 0.3s;
-        }
-
-        .team-member:hover .member-image img {
-            filter: grayscale(0%) brightness(0.9);
+            max-width: 60%;
+            max-height: 60%;
+            object-fit: contain;
         }
 
         .member-info {
@@ -423,8 +398,6 @@
         .member-info h3 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
-            font-family: 'Times New Roman', serif;
-            letter-spacing: 0.5px;
         }
 
         .member-role {
@@ -432,14 +405,11 @@
             font-weight: 600;
             margin-bottom: 1rem;
             display: block;
-            font-style: italic;
         }
 
         .member-bio {
             color: var(--text-light);
             margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            line-height: 1.5;
         }
 
         .social-links {
@@ -450,7 +420,7 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: var(--light-bg);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -458,7 +428,6 @@
             color: var(--text-color);
             text-decoration: none;
             transition: background-color 0.3s, color 0.3s;
-            border: 1px solid rgba(200, 200, 200, 0.1);
         }
 
         .social-link:hover {
@@ -468,7 +437,6 @@
 
         /* Team others card */
         .team-others {
-            background: linear-gradient(to bottom, var(--card-bg), rgba(30, 30, 30, 0.9));
             text-align: center;
         }
 
@@ -476,19 +444,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.03);
         }
 
         .others-icon {
             font-size: 5rem;
-            color: rgba(200, 0, 0, 0.7);
-            animation: pulse 3s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.7; }
+            color: var(--accent-color);
+            opacity: 0.7;
         }
 
         /* Community section */
@@ -752,7 +714,7 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">
-                    <i class="fas fa-skull" style="margin-right: 10px; color: var(--accent-color);"></i>
+                    <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo.png?raw=true" alt="Project OED Logo" style="height: 40px; margin-right: 10px;">
                     <span>Project OED</span>
                 </a>
                 <button class="mobile-menu-btn">
@@ -918,6 +880,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
+                <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="Project OED Logo" style="height: 120px; margin-bottom: 2rem;">
                 <h1 data-lang="ko">Project OED</h1>
                 <h1 data-lang="en">Project OED</h1>
                 <h1 data-lang="ja">Project OED</h1>
@@ -945,7 +908,7 @@
             <div class="footer-content">
                 <div class="footer-about">
                     <a href="#" class="footer-logo">
-                        <i class="fas fa-skull" style="margin-right: 10px; color: var(--accent-color);"></i>
+                        <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo.png?raw=true" alt="Project OED Logo" style="height: 40px; margin-right: 10px;">
                         <span>Project OED</span>
                     </a>
                     <p data-lang="ko">오이디푸스적 비극을 기반으로 한 미스터리 어드벤처 게임. 2026년 출시 예정.</p>
@@ -1279,7 +1242,7 @@
                 <!-- 기획 팀원 1 -->
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="/api/placeholder/300/300" alt="Team Member">
+                        <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="Team Member">
                     </div>
                     <div class="member-info">
                         <h3 data-lang="ko">박이야기</h3>
@@ -1308,7 +1271,7 @@
                 <!-- 기획 팀원 2 -->
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="/api/placeholder/300/300" alt="Team Member">
+                        <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="Team Member">
                     </div>
                     <div class="member-info">
                         <h3 data-lang="ko">김구상</h3>
@@ -1337,12 +1300,96 @@
                 <!-- 기획 팀원 3 -->
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="/api/placeholder/300/300" alt="Team Member">
+                        <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="Team Member">
                     </div>
                     <div class="member-info">
                         <h3 data-lang="ko">이세계</h3>
                         <h3 data-lang="en">Lee Segye</h3>
                         <h3 data-lang="ja">イ・セゲ</h3>
+                        
+                        <span class="member-role" data-lang="ko">세계관 디자이너</span>
+                        <span class="member-role" data-lang="en">World Designer</span>
+                        <span class="member-role" data-lang="ja">世界観デザイナー</span>
+                        
+                        <p class="member-bio" data-lang="ko">그리스로마 신화와 크툴루 신화의 현대적 재해석. 신화적 요소와 호러가 어우러진 독특한 세계관 창조.</p>
+                        <p class="member-bio" data-lang="en">Modern reinterpretation of Greco-Roman mythology and Cthulhu mythos. Creating a unique world view where mythological elements and horror blend together.</p>
+                        <p class="member-bio" data-lang="ja">ギリシャローマ神話とクトゥルフ神話の現代的再解釈。神話的要素とホラーが調和した独特な世界観創造。</p>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-medium-m"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 추가 팀원들 -->
+                <div class="team-member team-others">
+                    <div class="member-image others-image">
+                        <div class="others-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 data-lang="ko">그리고 더 많은 팀원들...</h3>
+                        <h3 data-lang="en">And Many More...</h3>
+                        <h3 data-lang="ja">そして多くのチームメンバー...</h3>
+                        
+                        <p class="member-bio" data-lang="ko">프로그래머, 아티스트, 사운드 디자이너 등 Project OED를 함께 만들어가는 열정적인 창작자들이 함께합니다.</p>
+                        <p class="member-bio" data-lang="en">Programmers, artists, sound designers, and many other passionate creators are working together to create Project OED.</p>
+                        <p class="member-bio" data-lang="ja">プログラマー、アーティスト、サウンドデザイナーなど、Project OEDを一緒に作り上げる情熱的なクリエイターたちが集まっています。</p>
+                        
+                        <a href="https://birdsol1122.github.io/projectoed1122/" class="btn" target="_blank" data-lang="ko">팀에 합류하기</a>
+                        <a href="https://birdsol1122.github.io/projectoed1122/" class="btn" target="_blank" data-lang="en">Join Our Team</a>
+                        <a href="https://birdsol1122.github.io/projectoed1122/" class="btn" target="_blank" data-lang="ja">チームに参加</a>
+                    </div>
+                </div>
+            </div>ゲ</h3>
+                        
+                        <span class="member-role" data-lang="ko">세계관 디자이너</span>
+                        <span class="member-role" data-lang="en">World Designer</span>
+                        <span class="member-role" data-lang="ja">世界観デザイナー</span>
+                        
+                        <p class="member-bio" data-lang="ko">그리스로마 신화와 크툴루 신화의 현대적 재해석. 신화적 요소와 호러가 어우러진 독특한 세계관 창조.</p>
+                        <p class="member-bio" data-lang="en">Modern reinterpretation of Greco-Roman mythology and Cthulhu mythos. Creating a unique world view where mythological elements and horror blend together.</p>
+                        <p class="member-bio" data-lang="ja">ギリシャローマ神話とクトゥルフ神話の現代的再解釈。神話的要素とホラーが調和した独特な世界観創造。</p>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-medium-m"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 추가 팀원들 -->
+                <div class="team-member team-others">
+                    <div class="member-image others-image">
+                        <div class="others-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3 data-lang="ko">그리고 더 많은 팀원들...</h3>
+                        <h3 data-lang="en">And Many More...</h3>
+                        <h3 data-lang="ja">そして多くのチームメンバー...</h3>
+                        
+                        <p class="member-bio" data-lang="ko">프로그래머, 아티스트, 사운드 디자이너 등 Project OED를 함께 만들어가는 열정적인 창작자들이 함께합니다.</p>
+                        <p class="member-bio" data-lang="en">Programmers, artists, sound designers, and many other passionate creators are working together to create Project OED.</p>
+                        <p class="member-bio" data-lang="ja">プログラマー、アーティスト、サウンドデザイナーなど、Project OEDを一緒に作り上げる情熱的なクリエイターたちが集まっています。</p>
+                        
+                        <a href="https://birdsol1122.github.io/projectoed1122/" class="btn" target="_blank" data-lang="ko">팀에 합류하기</a>
+                        <a href="https://birdsol1122.github.io/projectoed1122/" class="btn" target="_blank" data-lang="en">Join Our Team</a>
+                        <a href="https://birdsol1122.github.io/projectoed1122/" class="btn" target="_blank" data-lang="ja">チームに参加</a>
+                    </div>
+                </div>
+            </div>ゲ</h3>
                         
                         <span class="member-role" data-lang="ko">세계관 디자이너</span>
                         <span class="member-role" data-lang="en">World Designer</span>
