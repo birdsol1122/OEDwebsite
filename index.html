@@ -315,51 +315,52 @@
         }
         @media (max-width: 768px) {
             .hero h1 { 
-                font-size: 2.5rem; 
-                letter-spacing: 4px;
+                font-size: 2.2rem; 
+                letter-spacing: 3px;
                 margin-bottom: 1rem;
             }
             
             .hero-text {
-                font-size: 1.1rem;
-                line-height: 1.6;
+                font-size: 0.95rem;
+                line-height: 1.5;
                 padding: 0 1rem;
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
             }
             
             .hero-buttons {
                 flex-direction: column;
-                gap: 0.8rem;
-                padding: 0 1.5rem;
+                gap: 0.6rem;
+                padding: 0 1rem;
                 width: 100%;
-                max-width: 300px;
+                max-width: 240px;
                 margin: 0 auto;
             }
             
             .btn {
                 width: 100%;
                 text-align: center;
-                padding: 0.8rem;
-                font-size: 0.9rem;
-                min-height: 2.8rem;
-                display: flex;
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+                min-height: 2.4rem;
+                display: inline-flex;
                 align-items: center;
                 justify-content: center;
                 margin: 0;
+                line-height: 1;
             }
 
             .btn-outline {
-                margin-top: 0.3rem;
+                margin-top: 0.2rem;
             }
             
             .nav-links {
                 position: fixed;
-                top: 60px;
+                top: 50px;
                 left: 0;
                 background-color: rgba(18, 18, 18, 0.95);
                 width: 100%;
                 flex-direction: column;
-                padding: 1rem;
+                padding: 0.8rem;
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
                 transition: clip-path 0.3s ease;
                 backdrop-filter: blur(10px);
@@ -373,15 +374,15 @@
             
             .nav-links li {
                 margin: 0;
-                padding: 0.5rem 0;
+                padding: 0.4rem 0;
                 width: 100%;
                 text-align: center;
             }
             
             .nav-link {
                 display: block;
-                padding: 0.6rem;
-                font-size: 1rem;
+                padding: 0.5rem;
+                font-size: 0.9rem;
             }
             
             .language-selector {
@@ -391,23 +392,26 @@
             }
             
             .language-btn {
-                padding: 0.5rem;
-                font-size: 0.9rem;
+                padding: 0.4rem;
+                font-size: 0.8rem;
+                height: 30px;
+                display: flex;
+                align-items: center;
             }
             
             .language-dropdown {
                 position: absolute;
                 top: 100%;
                 right: 0;
-                width: 150px;
-                margin-top: 0.5rem;
+                width: 120px;
+                margin-top: 0.3rem;
             }
             
             .cassette-btn {
-                bottom: 20px;
-                left: 20px;
-                transform: scale(0.8);
-                padding: 8px;
+                bottom: 15px;
+                left: 15px;
+                transform: scale(0.7);
+                padding: 6px;
                 background-color: rgba(18, 18, 18, 0.7);
                 border-radius: 50%;
                 backdrop-filter: blur(5px);
@@ -415,39 +419,51 @@
             }
 
             .cassette-btn i {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
         }
         @media (max-width: 480px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
                 letter-spacing: 2px;
             }
             
             .hero-text {
-                font-size: 0.95rem;
-                padding: 0 1rem;
+                font-size: 0.85rem;
+                padding: 0 0.8rem;
+                margin-bottom: 1.2rem;
             }
             
             .hero-buttons {
-                padding: 0 1rem;
-                max-width: 280px;
+                padding: 0 0.8rem;
+                max-width: 220px;
+                gap: 0.5rem;
             }
             
             .btn {
-                padding: 0.7rem;
-                font-size: 0.85rem;
-                min-height: 2.6rem;
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+                min-height: 2.2rem;
+            }
+
+            .btn-outline {
+                margin-top: 0.1rem;
             }
 
             .cassette-btn {
-                bottom: 15px;
-                left: 15px;
-                transform: scale(0.75);
+                bottom: 12px;
+                left: 12px;
+                transform: scale(0.65);
             }
 
             .language-btn {
-                font-size: 0.85rem;
+                font-size: 0.75rem;
+                height: 28px;
+            }
+
+            .language-option {
+                padding: 0.4rem;
+                font-size: 0.75rem;
             }
         }
         /* 터치 최적화 */
