@@ -7,8 +7,11 @@
     <meta name="keywords" content="인디게임, 미스터리 게임, 추리 게임, 어드벤처 게임, 오이디푸스, 크툴루, 호러, Project OED" />
     <title>Project OED - 오이디푸스적 비극의 인디게임</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <!-- Galmuri 폰트 적용 -->
-    <link href="https://fastly.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css" rel="stylesheet">
+    <!-- 구글 폰트 추가 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #e0e0e0;
@@ -28,8 +31,16 @@
             box-sizing: border-box;
         }
 
+        /* 언어별 폰트 설정 */
+        html[lang="ko"] {
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        html[lang="en"], html[lang="ja"] {
+            font-family: 'DotGothic16', sans-serif;
+        }
+
         body {
-            font-family: 'Galmuri', monospace;
             line-height: 1.6;
             color: #e0e0e0;
             background-color: #121212;
@@ -38,9 +49,9 @@
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Galmuri', monospace;
             font-weight: 700;
         }
+
 
         body::before {
             content: '';
@@ -227,10 +238,10 @@
             display: flex;
             align-items: center;
             font-weight: 500;
-            font-family: 'Galmuri', monospace;
             font-size: 1rem;
             letter-spacing: 1px;
         }
+
 
         .language-btn:focus {
             outline: none;
@@ -515,12 +526,12 @@
         }
 
         .retro-text {
-            font-family: 'Galmuri', monospace;
             letter-spacing: 1px;
             line-height: 1.7;
             color: var(--secondary-color);
             margin-bottom: 2rem;
         }
+
 
         /* Hidden content for translations */
         [data-lang] {
