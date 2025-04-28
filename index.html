@@ -324,22 +324,167 @@
             .footer-content { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .nav-links {
-                position: fixed; top: 70px; left: 0; background-color: var(--dark-bg); width: 100%;
-                flex-direction: column; padding: 2rem; clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transition: clip-path 0.3s ease;
+            .vhs-effect, .vhs-noise, .film-grain {
+                opacity: 0.3;
             }
-            .nav-links.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-            .nav-links li { margin: 1rem 0; }
-            .mobile-menu-btn { display: block; }
-            .footer-content { grid-template-columns: 1fr; gap: 3rem; }
+            
+            .hero h1 { 
+                font-size: 2.5rem; 
+                letter-spacing: 4px;
+            }
+            
+            .hero-text {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                padding: 0 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                background-color: rgba(18, 18, 18, 0.95);
+                width: 100%;
+                flex-direction: column;
+                padding: 1rem;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.3s ease;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 0.8rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .language-selector {
+                margin: 1rem 0;
+                width: 100%;
+            }
+            
+            .language-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.8rem;
+            }
+            
+            .language-dropdown {
+                width: 100%;
+                position: relative;
+                margin-top: 0.5rem;
+            }
+            
+            .team-member {
+                margin: 0 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+            
+            .footer-links-column {
+                text-align: center;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cassette-btn {
+                bottom: 20px;
+                left: 20px;
+                transform: scale(0.9);
+            }
         }
-        @media (max-width: 576px) {
-            .hero-logo { height: 80px; }
-            .hero h1 { font-size: 2rem; }
-            .section-title h2 { font-size: 2rem; }
-            .about-text h3 { font-size: 1.5rem; }
-            .team-grid { grid-template-columns: 1fr; }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+            
+            .hero-text {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .about-text h3 {
+                font-size: 1.3rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+        /* 터치 최적화 */
+        @media (hover: none) {
+            .btn:hover {
+                transform: none;
+            }
+            
+            .nav-link:hover::after {
+                transform: none;
+            }
+            
+            .team-member:hover {
+                transform: none;
+            }
+            
+            .social-link:hover {
+                transform: none;
+            }
+        }
+        /* 성능 최적화 */
+        @media (max-width: 768px) {
+            .hero::before {
+                animation: none;
+            }
+            
+            .glitch {
+                animation: none;
+            }
+            
+            .vhs-effect {
+                animation-duration: 1.6s;
+            }
+        }
+        /* 모바일 터치 영역 개선 */
+        @media (max-width: 768px) {
+            .nav-link, .footer-link, .btn {
+                padding: 0.8rem 1rem;
+                margin: 0.2rem 0;
+            }
+            
+            .social-link {
+                width: 44px;
+                height: 44px;
+                margin: 0 0.3rem;
+            }
         }
         /* 언어별 표시 */
         [data-lang] { display: none; }
@@ -779,12 +924,68 @@
             return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
         }
 
+        // 터치 이벤트 최적화
+        let touchStartY = 0;
+        let touchEndY = 0;
+        const mobileThreshold = 50; // 스크롤 감지 임계값
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].clientY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const diff = touchStartY - touchEndY;
+            if (Math.abs(diff) > mobileThreshold) {
+                // 스와이프 동작 처리
+                if (diff > 0) {
+                    // 위로 스와이프
+                    navLinks.classList.remove('active');
+                } else {
+                    // 아래로 스와이프
+                }
+            }
+        }
+
+        // 성능 최적화된 스크롤 이벤트
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    // 스크롤 기반 효과 처리
+                    if (window.scrollY > 100) {
+                        document.querySelector('header').classList.add('scrolled');
+                    } else {
+                        document.querySelector('header').classList.remove('scrolled');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
         // 음악 재생 관련
         const cassetteBtn = document.getElementById('cassetteBtn');
         const bgm = document.getElementById('bgm');
         let isPlaying = false;
 
+        // 모바일에서 오디오 컨텍스트 최적화
+        let audioContext;
+        function initAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
         function playBgm() {
+            initAudioContext();
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
             bgm.play();
             cassetteBtn.classList.add('playing');
             isPlaying = true;
@@ -804,76 +1005,95 @@
             }
         });
 
-        // 페이지 로드 시 PC에서만 자동재생
-        window.addEventListener('DOMContentLoaded', function() {
-            if (!isMobileDevice()) {
-                // PC 환경에서는 자동재생 시도
-                bgm.volume = 0.7; // 볼륨을 약간 낮춰서 시작
-                bgm.play().then(() => {
-                    isPlaying = true;
-                    cassetteBtn.classList.add('playing');
-                }).catch(() => {
-                    // 자동재생이 차단된 경우
-                    isPlaying = false;
-                    cassetteBtn.classList.remove('playing');
-                    console.log('자동재생이 차단되었습니다. 재생 버튼을 클릭해주세요.');
-                });
-            } else {
-                // 모바일에서는 자동재생 비활성화
-                console.log('모바일 환경입니다. 수동으로 재생해주세요.');
+        // 모바일 메뉴 최적화
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('active');
+        });
+
+        // 모바일에서 메뉴 외부 클릭시 닫기
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('active') && !e.target.closest('.nav-links') && !e.target.closest('.mobile-menu-btn')) {
+                navLinks.classList.remove('active');
             }
         });
 
-        // 언어 선택
+        // 모바일에서 메뉴 항목 클릭시 자동으로 메뉴 닫기
+        navLinks.addEventListener('click', (e) => {
+            if (e.target.classList.contains('nav-link')) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // 언어 선택 최적화
         const languageBtn = document.querySelector('.language-btn');
         const languageDropdown = document.querySelector('.language-dropdown');
         const languageOptions = document.querySelectorAll('.language-option');
-        const htmlElement = document.querySelector('html');
+
         function switchLanguage(lang) {
-            document.querySelectorAll('[data-lang]').forEach(el => { el.style.display = 'none'; });
-            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => { el.style.display = 'block'; });
-            htmlElement.setAttribute('lang', lang);
-            try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                el.style.display = 'none';
+            });
+            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
+                el.style.display = 'block';
+            });
+            document.querySelector('html').setAttribute('lang', lang);
+            try {
+                localStorage.setItem('preferredLanguage', lang);
+            } catch (e) {
+                console.warn('LocalStorage is not available');
+            }
         }
+
+        // 이미지 지연 로딩
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.src = img.dataset.src;
+            });
+        } else {
+            // 폴백 지연 로딩
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+            document.body.appendChild(script);
+        }
+
+        // 페이지 로드 최적화
         document.addEventListener('DOMContentLoaded', function() {
+            // 기본 언어 설정
             let lang = 'ko';
             try {
                 const storedLang = localStorage.getItem('preferredLanguage');
-                if (storedLang) { lang = storedLang; }
-            } catch (e) {}
+                if (storedLang) {
+                    lang = storedLang;
+                }
+            } catch (e) {
+                console.warn('LocalStorage is not available');
+            }
             switchLanguage(lang);
-        });
-        languageBtn.addEventListener('click', () => {
-            languageDropdown.classList.toggle('show');
-        });
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.language-selector')) {
-                languageDropdown.classList.remove('show');
+
+            // 모바일 환경 체크 및 최적화
+            if (isMobileDevice()) {
+                document.body.classList.add('mobile');
+                // 모바일에서 특정 애니메이션 비활성화
+                document.body.classList.add('reduce-motion');
             }
         });
-        languageOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const langCode = option.getAttribute('data-lang-code');
-                switchLanguage(langCode);
-                languageDropdown.classList.remove('show');
-            });
-        });
-        // 모바일 메뉴
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-        // 랜덤 글리치 효과
-        const glitchElements = document.querySelectorAll('.glitch');
-        function randomGlitch() {
-            if (glitchElements.length > 0) {
-                const randomElement = glitchElements[Math.floor(Math.random() * glitchElements.length)];
-                randomElement.style.animation = 'glitch 0.3s forwards';
-                setTimeout(() => { randomElement.style.animation = ''; }, 300);
-            }
-        }
-        setInterval(randomGlitch, 3000);
+
+        // 성능 최적화된 리사이즈 이벤트
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                // 리사이즈 시 필요한 조정
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                }
+            }, 250);
+        }, { passive: true });
     </script>
 </body>
 </html>
