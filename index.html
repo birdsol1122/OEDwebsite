@@ -189,12 +189,29 @@
         }
         .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
         /* Hero */
-        .hero { height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 60px; }
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+        }
+
         .hero::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
                 url('https://github.com/birdsol1122/OEDwebsite/blob/main/eden_n13_13831_wide_cinematic_matte-painting_ruined_neo-Byzanti_633b17cf-0528-467b-b27a-71a122dbffcc.png?raw=true');
-            background-size: cover; background-position: center; z-index: -2; filter: brightness(0.6) contrast(1.2);
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            filter: brightness(0.6) contrast(1.2) saturate(0.8);
+            animation: subtle-zoom 30s ease-in-out infinite alternate;
         }
         .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(to bottom, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 3px, rgba(0, 0, 0, 0.03) 3px); pointer-events: none; z-index: -1; opacity: 0.4; }
         .hero-content { max-width: 800px; color: white; text-align: center; position: relative; z-index: 1; }
@@ -478,7 +495,6 @@
     </header>
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
                 <h1 class="glitch" data-lang="ko">Project OED</h1>
