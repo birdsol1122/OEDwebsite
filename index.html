@@ -324,10 +324,6 @@
             .footer-content { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
-            .vhs-effect, .vhs-noise, .film-grain {
-                opacity: 0.3;
-            }
-            
             .hero h1 { 
                 font-size: 2.5rem; 
                 letter-spacing: 4px;
@@ -468,10 +464,6 @@
             .glitch {
                 animation: none;
             }
-            
-            .vhs-effect {
-                animation-duration: 1.6s;
-            }
         }
         /* 모바일 터치 영역 개선 */
         @media (max-width: 768px) {
@@ -590,14 +582,7 @@
     </style>
 </head>
 <body>
-    <!-- VHS 노이즈 SVG 오버레이 -->
-    <svg class="vhs-noise" viewBox="0 0 1920 1080">
-        <filter id="noiseFilter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/>
-        </filter>
-        <rect width="1920" height="1080" filter="url(#noiseFilter)" />
-    </svg>
-    <div class="vhs-effect"></div>
+    <!-- VHS 노이즈 SVG 오버레이 제거 -->
     <!-- 재생 버튼 -->
     <button class="cassette-btn" id="cassetteBtn" title="배경음악 재생/정지">
         <i class="fas fa-play"></i>
@@ -606,7 +591,6 @@
     <!-- 음악 플레이어 -->
     <audio id="bgm" src="https://github.com/birdsol1122/OEDwebsite/blob/main/0428.MP3?raw=true" loop></audio>
     <!-- 새로운 시각 효과들 -->
-    <div class="film-grain"></div>
     <div class="chromatic-aberration"></div>
     <div class="vignette"></div>
     <div class="scanlines"></div>
