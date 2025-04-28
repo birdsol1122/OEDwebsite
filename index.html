@@ -317,18 +317,23 @@
             .hero h1 { 
                 font-size: 2.5rem; 
                 letter-spacing: 4px;
+                margin-bottom: 1rem;
             }
             
             .hero-text {
                 font-size: 1.1rem;
                 line-height: 1.6;
                 padding: 0 1rem;
+                margin-bottom: 2rem;
             }
             
             .hero-buttons {
                 flex-direction: column;
                 gap: 1rem;
-                padding: 0 1rem;
+                padding: 0 2rem;
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
             }
             
             .btn {
@@ -336,6 +341,15 @@
                 text-align: center;
                 padding: 1rem;
                 font-size: 1rem;
+                min-height: 3.2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0;
+            }
+
+            .btn-outline {
+                margin-top: 0.5rem;
             }
             
             .nav-links {
@@ -345,7 +359,7 @@
                 background-color: rgba(18, 18, 18, 0.95);
                 width: 100%;
                 flex-direction: column;
-                padding: 1rem;
+                padding: 1.5rem;
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
                 transition: clip-path 0.3s ease;
                 backdrop-filter: blur(10px);
@@ -357,9 +371,16 @@
             }
             
             .nav-links li {
-                margin: 0.8rem 0;
+                margin: 0;
+                padding: 0.8rem 0;
                 width: 100%;
                 text-align: center;
+            }
+            
+            .nav-link {
+                display: block;
+                padding: 0.8rem 1rem;
+                font-size: 1.1rem;
             }
             
             .language-selector {
@@ -371,6 +392,7 @@
                 width: 100%;
                 justify-content: center;
                 padding: 0.8rem;
+                font-size: 1.1rem;
             }
             
             .language-dropdown {
@@ -379,30 +401,24 @@
                 margin-top: 0.5rem;
             }
             
-            .team-member {
-                margin: 0 1rem;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 0 1rem;
-            }
-            
-            .footer-links-column {
-                text-align: center;
-            }
-            
-            .footer-links {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+            .language-option {
+                padding: 1rem;
+                font-size: 1.1rem;
             }
             
             .cassette-btn {
-                bottom: 20px;
-                left: 20px;
+                bottom: 25px;
+                left: 25px;
                 transform: scale(0.9);
+                padding: 10px;
+                background-color: rgba(18, 18, 18, 0.7);
+                border-radius: 50%;
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+            }
+
+            .cassette-btn i {
+                font-size: 2.2rem;
             }
         }
         @media (max-width: 480px) {
@@ -413,18 +429,23 @@
             
             .hero-text {
                 font-size: 1rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-            
-            .about-text h3 {
-                font-size: 1.3rem;
-            }
-            
-            .container {
                 padding: 0 1rem;
+            }
+            
+            .hero-buttons {
+                padding: 0 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.9rem;
+                font-size: 0.95rem;
+                min-height: 3rem;
+            }
+
+            .cassette-btn {
+                bottom: 20px;
+                left: 20px;
+                transform: scale(0.85);
             }
         }
         /* 터치 최적화 */
