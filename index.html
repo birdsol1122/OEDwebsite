@@ -275,123 +275,89 @@
         html[lang="ja"] [data-lang="ko"], html[lang="ja"] [data-lang="en"] { display: none; }
         html[lang="ko"] [data-lang="ko"] { display: block; }
         html[lang="ko"] [data-lang="en"], html[lang="ko"] [data-lang="ja"] { display: none; }
-        /* 카세트 버튼 스타일 */
+        /* 재생 버튼 심플 스타일 */
         .cassette-btn {
             position: fixed;
             bottom: 30px;
             left: 30px;
             z-index: 2001;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(45deg, #111, #222);
-            border: 3px solid #ff3e3e;
-            border-radius: 15px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.7), 
-                        0 0 0 4px #111 inset,
-                        0 0 20px rgba(255,62,62,0.5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            background: none;
+            border: none;
             cursor: pointer;
+            opacity: 0.7;
             transition: all 0.3s ease;
-            transform-style: preserve-3d;
-            perspective: 1000px;
         }
-        .cassette-btn:hover {
-            transform: translateY(-2px) rotateX(10deg);
-            background: linear-gradient(45deg, #222, #333);
-            box-shadow: 0 8px 24px rgba(255,62,62,0.4), 
-                        0 0 0 4px #ff3e3e55 inset,
-                        0 0 30px rgba(255,62,62,0.6);
-        }
-        .cassette-btn.playing {
-            background: linear-gradient(45deg, #ff3e3e, #ff5555);
-            border-color: #fff;
-            box-shadow: 0 0 24px #ff3e3e99, 
-                        0 0 0 4px #fff inset,
-                        0 0 40px rgba(255,62,62,0.8);
-            animation: cassette-rotate 4s linear infinite;
-        }
+
         .cassette-btn i {
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             color: #ff3e3e;
-            margin-top: 8px;
+            text-shadow: 0 0 15px rgba(255, 62, 62, 0.5);
             transition: all 0.3s ease;
         }
-        .cassette-btn.playing i {
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+
+        .cassette-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
         }
+
+        .cassette-btn:hover i {
+            text-shadow: 0 0 20px rgba(255, 62, 62, 0.8);
+        }
+
         .cassette-btn .fa-play { display: block; }
         .cassette-btn .fa-pause { display: none; }
         .cassette-btn.playing .fa-play { display: none; }
         .cassette-btn.playing .fa-pause { display: block; }
-        /* 필름 그레인 효과 */
-        .film-grain {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 9997;
-            opacity: 0.12;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMC4xNSIvPjwvc3ZnPg==');
+
+        /* 준비중 섹션 스타일 */
+        .coming-soon {
+            background: var(--dark-bg);
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        /* 색수차 효과 */
-        .chromatic-aberration {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 9996;
-            mix-blend-mode: screen;
-            opacity: 0.03;
-        }
-        .chromatic-aberration::before,
-        .chromatic-aberration::after {
+
+        .coming-soon::before {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: inherit;
-            mix-blend-mode: multiply;
-        }
-        .chromatic-aberration::before {
-            background-color: #f0f;
-            transform: translate(-1px, 0);
-        }
-        .chromatic-aberration::after {
-            background-color: #0ff;
-            transform: translate(1px, 0);
-        }
-        /* 비네트 효과 */
-        .vignette {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 62, 62, 0.1), transparent);
             pointer-events: none;
-            z-index: 9995;
-            background: radial-gradient(
-                circle at center,
-                transparent 40%,
-                rgba(0,0,0,0.4) 100%
-            );
         }
-        /* 스캔라인 효과 */
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 9994;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent,
-                transparent 1px,
-                rgba(0, 0, 0, 0.1) 2px,
-                rgba(0, 0, 0, 0.1) 3px
-            );
-            opacity: 0.3;
+
+        .coming-soon-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .coming-soon h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px rgba(255, 62, 62, 0.5);
+        }
+
+        .coming-soon p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .coming-soon .glitch-text {
+            position: relative;
+            display: inline-block;
+            animation: coming-soon-flicker 4s infinite;
+        }
+
+        @keyframes coming-soon-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
     </style>
 </head>
@@ -405,12 +371,12 @@
     </svg>
     <div class="vhs-effect"></div>
     <button id="glitch-toggle" style="position:fixed;top:20px;right:20px;z-index:2000;">글리치 모드 토글</button>
-    <!-- 카세트 테이프 음악 토글 버튼 -->
-    <div class="cassette-btn" id="cassetteBtn" title="배경음악 재생/정지">
+    <!-- 재생 버튼 -->
+    <button class="cassette-btn" id="cassetteBtn" title="배경음악 재생/정지">
         <i class="fas fa-play"></i>
         <i class="fas fa-pause"></i>
-    </div>
-    <!-- 음악 플레이어 (숨김) -->
+    </button>
+    <!-- 음악 플레이어 -->
     <audio id="bgm" src="https://github.com/birdsol1122/OEDwebsite/blob/main/0428.MP3?raw=true" loop></audio>
     <!-- 새로운 시각 효과들 -->
     <div class="film-grain"></div>
@@ -649,56 +615,16 @@
         </div>
     </section>
     <!-- Community Section -->
-    <section id="community" class="community">
+    <section id="community" class="coming-soon">
         <div class="container">
-            <div class="section-title">
-                <h2 class="glitch" data-lang="ko">커뮤니티</h2>
-                <h2 class="glitch" data-lang="en">Community</h2>
-                <h2 class="glitch" data-lang="ja">コミュニティ</h2>
-                <p data-lang="ko">Project OED의 개발 과정을 함께 지켜보고 참여해 보세요</p>
-                <p data-lang="en">Watch and participate in the development process of Project OED</p>
-                <p data-lang="ja">Project OEDの開発過程を一緒に見守って参加してみてください</p>
-            </div>
-            <div class="community-content">
-                <div class="community-text">
-                    <p class="retro-text" data-lang="ko">다양한 소셜 미디어 채널을 통해 Project OED의 최신 소식을 확인하고,<br>개발자들과 소통하며 게임 개발 과정에 참여해 보세요.</p>
-                    <p class="retro-text" data-lang="en">Check out the latest news about Project OED through various social media channels,<br>and participate in the game development process by communicating with developers.</p>
-                    <p class="retro-text" data-lang="ja">様々なソーシャルメディアチャンネルを通じてProject OEDの最新ニュースを確認し、<br>開発者と交流しながらゲーム開発プロセスに参加してみてください。</p>
-                </div>
-                <div class="community-links">
-                    <a href="#" class="community-link glitch">
-                        <div class="community-icon"><i class="fab fa-discord"></i></div>
-                        <h3>Discord</h3>
-                        <p class="retro-text" data-lang="ko">개발자와 직접 소통하고 최신 업데이트를 받아보세요</p>
-                        <p class="retro-text" data-lang="en">Communicate directly with developers and receive the latest updates</p>
-                        <p class="retro-text" data-lang="ja">開発者と直接交流し、最新アップデートを受け取りましょう</p>
-                        <div class="link-glitch-effect"></div>
-                    </a>
-                    <a href="#" class="community-link glitch">
-                        <div class="community-icon"><i class="fab fa-twitter"></i></div>
-                        <h3>Twitter</h3>
-                        <p class="retro-text" data-lang="ko">빠른 소식과 개발 현황을 확인하세요</p>
-                        <p class="retro-text" data-lang="en">Check out quick news and development status</p>
-                        <p class="retro-text" data-lang="ja">速報や開発状況をチェックしてください</p>
-                        <div class="link-glitch-effect"></div>
-                    </a>
-                    <a href="#" class="community-link glitch">
-                        <div class="community-icon"><i class="fab fa-instagram"></i></div>
-                        <h3>Instagram</h3>
-                        <p class="retro-text" data-lang="ko">게임의 아트워크와 비주얼을 감상하세요</p>
-                        <p class="retro-text" data-lang="en">Enjoy the game's artwork and visuals</p>
-                        <p class="retro-text" data-lang="ja">ゲームのアートワークとビジュアルをお楽しみください</p>
-                        <div class="link-glitch-effect"></div>
-                    </a>
-                    <a href="#" class="community-link glitch">
-                        <div class="community-icon"><i class="fab fa-youtube"></i></div>
-                        <h3>YouTube</h3>
-                        <p class="retro-text" data-lang="ko">트레일러와 게임플레이 영상을 시청하세요</p>
-                        <p class="retro-text" data-lang="en">Watch trailers and gameplay videos</p>
-                        <p class="retro-text" data-lang="ja">トレーラーとゲームプレイ映像をご覧ください</p>
-                        <div class="link-glitch-effect"></div>
-                    </a>
-                </div>
+            <div class="coming-soon-content">
+                <h2 class="glitch" data-lang="ko">커뮤니티 <span class="glitch-text">준비중</span></h2>
+                <h2 class="glitch" data-lang="en">Community <span class="glitch-text">Coming Soon</span></h2>
+                <h2 class="glitch" data-lang="ja">コミュニティ <span class="glitch-text">準備中</span></h2>
+                
+                <p data-lang="ko">Project OED의 커뮤니티가 곧 여러분을 찾아갑니다.<br>더 나은 소통과 교류의 장을 준비하고 있으니 조금만 기다려주세요.</p>
+                <p data-lang="en">Project OED community is coming to you soon.<br>We are preparing a better place for communication and exchange.</p>
+                <p data-lang="ja">Project OEDのコミュニティが間もなく皆様のもとへ。<br>より良いコミュニケーションと交流の場を準備しておりますので、今しばらくお待ちください。</p>
             </div>
         </div>
     </section>
@@ -773,10 +699,61 @@
         </div>
     </footer>
     <script>
+        // 모바일 기기 감지
+        function isMobileDevice() {
+            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+        }
+
         // 글리치 토글
         document.getElementById('glitch-toggle').addEventListener('click', function() {
             document.body.classList.toggle('glitch-off');
         });
+
+        // 음악 재생 관련
+        const cassetteBtn = document.getElementById('cassetteBtn');
+        const bgm = document.getElementById('bgm');
+        let isPlaying = false;
+
+        function playBgm() {
+            bgm.play();
+            cassetteBtn.classList.add('playing');
+            isPlaying = true;
+        }
+
+        function pauseBgm() {
+            bgm.pause();
+            cassetteBtn.classList.remove('playing');
+            isPlaying = false;
+        }
+
+        cassetteBtn.addEventListener('click', function() {
+            if (!isPlaying) {
+                playBgm();
+            } else {
+                pauseBgm();
+            }
+        });
+
+        // 페이지 로드 시 PC에서만 자동재생
+        window.addEventListener('DOMContentLoaded', function() {
+            if (!isMobileDevice()) {
+                // PC 환경에서는 자동재생 시도
+                bgm.volume = 0.7; // 볼륨을 약간 낮춰서 시작
+                bgm.play().then(() => {
+                    isPlaying = true;
+                    cassetteBtn.classList.add('playing');
+                }).catch(() => {
+                    // 자동재생이 차단된 경우
+                    isPlaying = false;
+                    cassetteBtn.classList.remove('playing');
+                    console.log('자동재생이 차단되었습니다. 재생 버튼을 클릭해주세요.');
+                });
+            } else {
+                // 모바일에서는 자동재생 비활성화
+                console.log('모바일 환경입니다. 수동으로 재생해주세요.');
+            }
+        });
+
         // 언어 선택
         const languageBtn = document.querySelector('.language-btn');
         const languageDropdown = document.querySelector('.language-dropdown');
@@ -827,37 +804,6 @@
             }
         }
         setInterval(randomGlitch, 3000);
-        // 카세트 버튼 음악 토글
-        const cassetteBtn = document.getElementById('cassetteBtn');
-        const bgm = document.getElementById('bgm');
-        let isPlaying = true;
-        function playBgm() {
-            bgm.play();
-            cassetteBtn.classList.add('playing');
-            isPlaying = true;
-        }
-        function pauseBgm() {
-            bgm.pause();
-            cassetteBtn.classList.remove('playing');
-            isPlaying = false;
-        }
-        cassetteBtn.addEventListener('click', function() {
-            if (!isPlaying) {
-                playBgm();
-            } else {
-                pauseBgm();
-            }
-        });
-        // 페이지 로드 시 자동재생
-        window.addEventListener('DOMContentLoaded', function() {
-            bgm.play().then(() => {
-                cassetteBtn.classList.add('playing');
-            }).catch(() => {
-                // 자동재생이 차단된 경우
-                isPlaying = false;
-                cassetteBtn.classList.remove('playing');
-            });
-        });
     </script>
 </body>
 </html>
