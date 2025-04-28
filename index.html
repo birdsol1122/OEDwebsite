@@ -7,8 +7,10 @@
     <meta name="description" content="Project OED - 추리, 미스터리, 어드벤처 장르의 인디 게임" />
     <meta name="keywords" content="인디게임, 미스터리 게임, 추리 게임, 어드벤처 게임, 오이디푸스, 크툴루, 호러, Project OED" />
     <!-- Neo둥근모 폰트 -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm/style.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm_code/style.css">
+    <link rel="preload" as="style" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm/style.css" />
+    <link rel="preload" as="style" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm_code/style.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm/style.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm_code/style.css" />
     <!-- 아이콘 폰트 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +18,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'NeoDunggeunmo';
+            src: url('//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm/neodgm.woff2') format('woff2'),
+                 url('//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.600/neodgm/neodgm.woff') format('woff');
+            font-display: swap;
+        }
+
         :root {
+            --primary-font: 'NeoDunggeunmo', 'Neo둥근모', monospace;
             --primary-color: #e0e0e0;
             --secondary-color: #a0a0a0;
             --accent-color: #ff3e3e;
@@ -26,6 +36,10 @@
             --border-color: #333333;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
             --text-glow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        body, button, input, select, textarea {
+            font-family: var(--primary-font);
         }
         html[lang="ko"] { font-family: 'Neo둥근모', 'Neo둥근모 Code', serif; }
         html[lang="en"], html[lang="ja"] { font-family: 'DotGothic16', sans-serif; }
@@ -92,6 +106,7 @@
             width: 100%;
             z-index: 1000;
             box-shadow: var(--shadow);
+            top: 0;
         }
         nav {
             display: flex;
@@ -364,13 +379,12 @@
 <body>
     <!-- VHS 노이즈 SVG 오버레이 -->
     <svg class="vhs-noise" viewBox="0 0 1920 1080">
-      <filter id="noiseFilter">
-        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/>
-      </filter>
-      <rect width="1920" height="1080" filter="url(#noiseFilter)" />
+        <filter id="noiseFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/>
+        </filter>
+        <rect width="1920" height="1080" filter="url(#noiseFilter)" />
     </svg>
     <div class="vhs-effect"></div>
-    <button id="glitch-toggle" style="position:fixed;top:20px;right:20px;z-index:2000;">글리치 모드 토글</button>
     <!-- 재생 버튼 -->
     <button class="cassette-btn" id="cassetteBtn" title="배경음악 재생/정지">
         <i class="fas fa-play"></i>
@@ -435,7 +449,6 @@
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
-                <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="Project OED Logo" class="hero-logo flicker">
                 <h1 class="glitch" data-lang="ko">Project OED</h1>
                 <h1 class="glitch" data-lang="en">Project OED</h1>
                 <h1 class="glitch" data-lang="ja">Project OED</h1>
@@ -641,17 +654,11 @@
                     <p class="retro-text" data-lang="ko">오이디푸스적 비극을 기반으로 한 미스터리 어드벤처 게임. 2026년 출시 예정.</p>
                     <p class="retro-text" data-lang="en">A mystery adventure game based on Oedipal tragedy. Coming in 2026.</p>
                     <p class="retro-text" data-lang="ja">オイディプス的悲劇をベースにしたミステリーアドベンチャーゲーム。2026年リリース予定。</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link glitch"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link glitch"><i class="fab fa-discord"></i></a>
-                        <a href="#" class="social-link glitch"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link glitch"><i class="fab fa-youtube"></i></a>
-                    </div>
                 </div>
                 <div class="footer-links-column">
-                    <h3 class="footer-title glitch" data-lang="ko">링크</h3>
-                    <h3 class="footer-title glitch" data-lang="en">Links</h3>
-                    <h3 class="footer-title glitch" data-lang="ja">リンク</h3>
+                    <h3 class="footer-title glitch" data-lang="ko">사이트맵</h3>
+                    <h3 class="footer-title glitch" data-lang="en">Sitemap</h3>
+                    <h3 class="footer-title glitch" data-lang="ja">サイトマップ</h3>
                     <ul class="footer-links">
                         <li><a href="#about" class="footer-link" data-lang="ko">프로젝트 소개</a>
                             <a href="#about" class="footer-link" data-lang="en">About</a>
@@ -676,9 +683,10 @@
                     <h3 class="footer-title glitch" data-lang="en">Competition</h3>
                     <h3 class="footer-title glitch" data-lang="ja">コンテスト</h3>
                     <ul class="footer-links">
-                        <li><a href="https://neowizquest.com/ko/" target="_blank" class="footer-link" data-lang="ko">네오위즈 퀘스트</a>
-                            <a href="https://neowizquest.com/en/" target="_blank" class="footer-link" data-lang="en">NEOWIZ Quest</a>
-                            <a href="https://neowizquest.com/ja/" target="_blank" class="footer-link" data-lang="ja">NEOWIZクエスト</a>
+                        <li>
+                            <span class="footer-text" data-lang="ko">네오위즈 퀘스트 준비중</span>
+                            <span class="footer-text" data-lang="en">NEOWIZ Quest Coming Soon</span>
+                            <span class="footer-text" data-lang="ja">NEOWIZクエスト 準備中</span>
                         </li>
                     </ul>
                 </div>
@@ -703,11 +711,6 @@
         function isMobileDevice() {
             return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
         }
-
-        // 글리치 토글
-        document.getElementById('glitch-toggle').addEventListener('click', function() {
-            document.body.classList.toggle('glitch-off');
-        });
 
         // 음악 재생 관련
         const cassetteBtn = document.getElementById('cassetteBtn');
