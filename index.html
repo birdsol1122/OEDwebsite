@@ -7,327 +7,112 @@
     <meta name="keywords" content="Indie Game, Mystery Game, Adventure Game, Project OED"/>
     <title>Project OED – Indie Mystery Adventure</title>
 
-    <!-- fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Coral+Pixels&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=DotGothic16&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* -------- root palette -------- */
-        :root {
-            --primary: #e0e0e0;
-            --secondary: #a0a0a0;
-            --accent: #ff3e3e;
-            --accent-hover: #ff5e5e;
-            --bg-dark: #121212;
-            --bg-card: #1a1a1a;
-            --border: #333;
-            --shadow: 0 4px 6px rgba(0,0,0,.5);
+        /* ---------------- Root Palette ---------------- */
+        :root{
+            --primary:#e0e0e0;--secondary:#a0a0a0;--accent:#ff3e3e;--accent-hover:#ff5e5e;
+            --bg-dark:#121212;--bg-card:#1a1a1a;--border:#333;--shadow:0 4px 6px rgba(0,0,0,.5)
         }
-        /* -------- resets -------- */
+        /* ---------------- Resets ---------------- */
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth}
-        body{background:var(--bg-dark);color:var(--primary);line-height:1.6;overflow-x:hidden}
+        body{background:var(--bg-dark);color:var(--primary);line-height:1.6;overflow-x:hidden;text-align:center}
         img{max-width:100%;display:block}
 
-        /* font per language */
-        html.lang-ko{font-family:'Noto Serif KR',serif}
-        html.lang-en{font-family:'Coral Pixels',sans-serif}
-        html.lang-ja{font-family:'Noto Sans JP',sans-serif}
-
-        /* motion‑safe */
-        @media (prefers-reduced-motion:reduce){
-            *{animation:none!important;transition:none!important}
+        /* ---------------- Analogue Overlays ---------------- */
+        /* Grain */
+        body::before{
+            content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
+            background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVQImWNkYGBg+M+ABAwMAAG5AAHEDu5eAAAAAElFTkSuQmCC") repeat;
+            opacity:.05;
         }
-        /* utility classes */
+        /* Scanline */
+        body::after{
+            content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+            background:repeating-linear-gradient(0deg,rgba(0,0,0,.15)0 1px,transparent 1px 3px);
+            mix-blend-mode:multiply;opacity:.4;animation:scan 8s linear infinite;
+        }
+        @keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+
+        /* ---------------- Font per language ---------------- */
+        html.lang-ko{font-family:'Noto Serif KR',serif}
+        html.lang-en{font-family:'Pixelify Sans',sans-serif}
+        html.lang-ja{font-family:'DotGothic16',sans-serif}
+
+        /* ---------------- Motion safe / reduced ---------------- */
+        @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+        /* ---------------- Glitch effect ---------------- */
+        @keyframes glitch{0%{transform:translate(0)}20%{transform:translate(-2px,2px)}40%{transform:translate(-2px,-2px)}60%{transform:translate(2px,2px)}80%{transform:translate(2px,-2px)}100%{transform:translate(0)}}
+        .glitch{animation:glitch .3s infinite;animation-play-state:paused}
+        .glitch:hover{animation-play-state:running}
+        .glitch-off .glitch,.glitch-off .glitch:hover{animation:none!important}
+
+        /* VHS RGB shift */
+        .vhs-shift{position:relative}
+        .vhs-shift::before,.vhs-shift::after{
+            content:attr(data-text);position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;filter:blur(1px);opacity:.6}
+        .vhs-shift::before{left:-1px;color:#ff4242}
+        .vhs-shift::after{left:1px;color:#42aaff}
+
+        /* ---------------- Utility ---------------- */
         .container{max-width:1200px;margin:auto;padding:0 2rem}
         .hidden{display:none!important}
 
-        /* header */
+        /* ---------------- Header ---------------- */
         header{background:var(--bg-dark);position:fixed;top:0;left:0;width:100%;z-index:1000;box-shadow:var(--shadow)}
         nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
         .logo{display:flex;align-items:center;font-size:1.5rem;text-decoration:none;color:var(--primary)}
         .mobile-btn{display:none;background:none;border:none;color:var(--primary);font-size:1.5rem}
-        .nav{display:flex;list-style:none}
+        .nav{display:flex;list-style:none;text-align:left}
         .nav li{margin-left:2rem}
         .nav a{color:var(--primary);text-decoration:none;font-weight:500;position:relative}
         .nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s}
         .nav a:hover::after{transform:scaleX(1)}
-        /* language */
+
+        /* Language selector & Glitch toggle */
         .lang-select{position:relative}
-        .lang-btn{background:none;border:1px solid var(--accent);color:var(--accent);padding:.4rem .8rem;cursor:pointer}
-        .lang-list{position:absolute;right:0;top:calc(100% + .5rem);background:var(--bg-card);border:1px solid var(--border);display:none}
-        .lang-list button{display:block;width:100%;padding:.6rem 1rem;background:none;border:none;color:var(--primary);text-align:left;cursor:pointer}
+        .lang-btn,.glitch-toggle{background:none;border:1px solid var(--accent);color:var(--accent);padding:.4rem .8rem;cursor:pointer}
+        .lang-list{position:absolute;right:0;top:calc(100% + .5rem);background:var(--bg-card);border:1px solid var(--border);display:none;text-align:left}
+        .lang-list button{display:block;width:100%;padding:.6rem 1rem;background:none;border:none;color:var(--primary);cursor:pointer}
         .lang-list button:hover{background:rgba(255,62,62,.1)}
 
-        /* hero */
-        #hero{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding-top:80px;text-align:center}
+        /* ---------------- Hero ---------------- */
+        #hero{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding-top:80px}
         #hero::before{content:"";position:absolute;inset:0;background:url('https://github.com/birdsol1122/OEDwebsite/blob/main/eden_n13_13831_wide_cinematic_matte-painting_ruined_neo-Byzanti_633b17cf-0528-467b-b27a-71a122dbffcc.png?raw=true') center/cover;filter:brightness(.6) contrast(1.2);z-index:-2}
         #hero h1{font-size:3rem;letter-spacing:4px;margin-bottom:1rem}
         .hero-text{font-size:1.1rem;margin-bottom:2rem}
-        .btn{display:inline-block;padding:.8rem 1.5rem;border:none;cursor:pointer;text-transform:uppercase;font-weight:600;letter-spacing:1px;background:var(--accent);color:#fff;transition:background .3s}
+        .btn{display:inline-block;padding:.8rem 1.5rem;border:none;cursor:pointer;text-transform:uppercase;font-weight:600;letter-spacing:1px;background:var(--accent);color:#fff;transition:background .3s;margin:.3rem}
         .btn:hover{background:var(--accent-hover)}
         .btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent)}
         .btn-outline:hover{background:var(--accent);color:#fff}
 
-        /* sections */
-        section{padding:5rem 0}
-        .section-title{text-align:center;margin-bottom:3rem}
+        /* ---------------- Sections ---------------- */
+        section{padding:5rem 0;text-align:center}
         .section-title h2{font-size:2.2rem;margin-bottom:1rem}
         .section-title p{color:var(--secondary)}
 
-        /* about */
-        #about .grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+        /* About */
+        #about .grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;text-align:left}
         #about img{filter:grayscale(30%) contrast(1.2) brightness(.85)}
         .feature-list{margin-top:2rem}
-        .feature{display:flex;margin-bottom:1.2rem}
+        .feature{display:flex;margin-bottom:1.2rem;align-items:center}
         .feature i{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(255,62,62,.1);border:1px solid var(--accent);color:var(--accent);margin-right:1rem}
 
-        /* team */
+        /* Team */
         #team{background:var(--bg-card)}
-        .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem}
+        .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem;text-align:left}
         .member{background:rgba(26,26,26,.8);border:1px solid var(--border);box-shadow:var(--shadow);transition:transform .3s}
         .member:hover{transform:translateY(-6px)}
-        .member img{height:240px;object-fit:contain;padding:2rem}
+        .member img{height:240px;object-fit:contain;padding:2rem;margin:auto}
         .member-info{padding:1.5rem}
         .member-info h3{font-size:1.3rem;margin-bottom:.4rem}
         .member-role{color:var(--accent);font-weight:600;display:block;margin-bottom:.7rem}
-        .member-bio{color:var(--secondary);font-size:.9rem}
-
-        /* community */
-        #community{background:var(--bg-dark)}
-        .comm-links{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center}
-        .comm-card{width:230px;background:var(--bg-card);border:1px solid var(--border);padding:1.5rem;text-align:center;transition:transform .3s}
-        .comm-card:hover{transform:translateY(-5px)}
-        .comm-card i{font-size:2rem;color:var(--accent);margin-bottom:1rem}
-
-        /* footer */
-        footer{background:#0a0a0a;padding:3rem 0;color:var(--secondary)}
-        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem}
-        .footer-links{list-style:none}
-        .footer-links a{color:var(--secondary);text-decoration:none}
-        .footer-links a:hover{color:var(--accent)}
-        .copyright{text-align:center;margin-top:2rem;font-size:.9rem}
-
-        /* responsive */
-        @media(max-width:992px){#about .grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
-        @media(max-width:768px){
-            .mobile-btn{display:block}
-            .nav{position:fixed;top:80px;left:0;width:100%;flex-direction:column;background:var(--bg-dark);padding:2rem;transform:translateY(-100%);transition:transform .3s}
-            .nav.show{transform:translateY(0)}
-            .nav li{margin:1rem 0}
-        }
-        @media(max-width:576px){#hero h1{font-size:2.2rem}}
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#hero" class="logo"><img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo.png?raw=true" alt="logo" style="height:40px;margin-right:10px">Project OED</a>
-                <button class="mobile-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
-                <ul class="nav">
-                    <li><a href="#about" data-i18n="nav_about"></a></li>
-                    <li><a href="#team" data-i18n="nav_team"></a></li>
-                    <li><a href="#community" data-i18n="nav_community"></a></li>
-                    <li><a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" data-i18n="nav_recruit"></a></li>
-                    <li class="lang-select">
-                        <button class="lang-btn" id="langBtn">한국어 ▼</button>
-                        <div class="lang-list" id="langList">
-                            <button data-lang="ko">한국어 🇰🇷</button>
-                            <button data-lang="en">English 🇺🇸</button>
-                            <button data-lang="ja">日本語 🇯🇵</button>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero -->
-    <section id="hero">
-        <div class="container">
-            <h1 data-i18n="hero_title"></h1>
-            <p class="hero-text" data-i18n="hero_sub"></p>
-            <div>
-                <a href="#about" class="btn" data-i18n="hero_learn"></a>
-                <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="btn btn-outline" data-i18n="hero_recruit"></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="about_title"></h2>
-                <p data-i18n="about_intro"></p>
-            </div>
-            <div class="grid">
-                <div><img src="https://github.com/birdsol1122/OEDwebsite/blob/main/santiago-avila-caro-JMcrYyCjAog-unsplash.jpg?raw=true" alt="screenshot"></div>
-                <div>
-                    <h3 data-i18n="about_heading"></h3>
-                    <p data-i18n="about_body"></p>
-                    <div class="feature-list">
-                        <div class="feature"><i class="fas fa-search"></i><div><strong data-i18n="about_feat1_h"></strong><br><span data-i18n="about_feat1_b"></span></div></div>
-                        <div class="feature"><i class="fas fa-book"></i><div><strong data-i18n="about_feat2_h"></strong><br><span data-i18n="about_feat2_b"></span></div></div>
-                        <div class="feature"><i class="fas fa-ghost"></i><div><strong data-i18n="about_feat3_h"></strong><br><span data-i18n="about_feat3_b"></span></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team -->
-    <section id="team">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="team_title"></h2>
-                <p data-i18n="team_intro"></p>
-            </div>
-            <div class="team-grid">
-                <div class="member">
-                    <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="member">
-                    <div class="member-info">
-                        <h3 data-i18n="team_m1_name"></h3>
-                        <span class="member-role" data-i18n="team_m1_role"></span>
-                        <p class="member-bio" data-i18n="team_m1_bio"></p>
-                    </div>
-                </div>
-                <div class="member">
-                    <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="member">
-                    <div class="member-info">
-                        <h3 data-i18n="team_m2_name"></h3>
-                        <span class="member-role" data-i18n="team_m2_role"></span>
-                        <p class="member-bio" data-i18n="team_m2_bio"></p>
-                    </div>
-                </div>
-                <div class="member">
-                    <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="member">
-                    <div class="member-info">
-                        <h3 data-i18n="team_m3_name"></h3>
-                        <span class="member-role" data-i18n="team_m3_role"></span>
-                        <p class="member-bio" data-i18n="team_m3_bio"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Community -->
-    <section id="community">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="comm_title"></h2>
-                <p data-i18n="comm_intro"></p>
-            </div>
-            <div class="comm-links">
-                <a href="#" class="comm-card" aria-label="Discord"><i class="fab fa-discord"></i><h3>Discord</h3><p data-i18n="comm_discord"></p></a>
-                <a href="#" class="comm-card" aria-label="Twitter"><i class="fab fa-twitter"></i><h3>Twitter</h3><p data-i18n="comm_twitter"></p></a>
-                <a href="#" class="comm-card" aria-label="Instagram"><i class="fab fa-instagram"></i><h3>Instagram</h3><p data-i18n="comm_instagram"></p></a>
-                <a href="#" class="comm-card" aria-label="YouTube"><i class="fab fa-youtube"></i><h3>YouTube</h3><p data-i18n="comm_youtube"></p></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-grid">
-            <div>
-                <a href="#hero" class="logo"><img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo.png?raw=true" alt="logo" style="height:40px;margin-right:10px">Project OED</a>
-                <p data-i18n="footer_about"></p>
-            </div>
-            <div>
-                <h4 data-i18n="footer_links"></h4>
-                <ul class="footer-links">
-                    <li><a href="#about" data-i18n="nav_about"></a></li>
-                    <li><a href="#team" data-i18n="nav_team"></a></li>
-                    <li><a href="#community" data-i18n="nav_community"></a></li>
-                    <li><a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" data-i18n="nav_recruit"></a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 data-i18n="footer_comp"></h4>
-                <ul class="footer-links"><li><a href="https://neowizquest.com/ko/" target="_blank">NEOWIZ Quest</a></li></ul>
-            </div>
-            <div>
-                <h4 data-i18n="footer_contact"></h4>
-                <ul class="footer-links"><li><a href="mailto:birdsol1122@gmail.com">birdsol1122@gmail.com</a></li></ul>
-            </div>
-        </div>
-        <p class="copyright">© 2025 Project OED</p>
-    </footer>
-
-    <script>
-        /* ------- mobile nav ------- */
-        const mobileBtn=document.querySelector('.mobile-btn');
-        const nav=document.querySelector('.nav');
-        mobileBtn.addEventListener('click',()=>nav.classList.toggle('show'));
-
-        /* ------- language i18n ------- */
-        const langBtn=document.getElementById('langBtn');
-        const langList=document.getElementById('langList');
-        langBtn.addEventListener('click',()=>langList.style.display=langList.style.display==='block'?'none':'block');
-        document.addEventListener('click',e=>{if(!e.target.closest('.lang-select'))langList.style.display='none'});
-
-        const translations={
-            ko:{
-                nav_about:'프로젝트 소개',nav_team:'팀 소개',nav_community:'커뮤니티',nav_recruit:'구인공고',
-                hero_title:'Project OED',hero_sub:'오이디푸스적 비극을 기반으로 한 미스터리 어드벤처 게임',hero_learn:'자세히 알아보기',hero_recruit:'구인공고 확인',
-                about_title:'프로젝트 소개',about_intro:'미스터리와 공포, 신화적 요소가 어우러진 세계',about_heading:'오이디푸스 비극 × 크툴루 신화',about_body:'Project OED는 고전 그리스 비극의 정서를 현대 호러와 결합합니다.',
-                about_feat1_h:'추리와 미스터리',about_feat1_b:'단서를 수집하고 사건을 해결하세요.',about_feat2_h:'신화적 배경',about_feat2_b:'그리스·로마와 크툴루 신화를 현대적으로 재해석.',about_feat3_h:'러브크래프트풍 호러',about_feat3_b:'알 수 없는 공포가 도사립니다.',
-                team_title:'팀 소개',team_intro:'Project OED를 만드는 사람들',
-                team_m1_name:'박이야기',team_m1_role:'시나리오 작가',team_m1_bio:'미스터리/호러 스토리텔러',
-                team_m2_name:'김구상',team_m2_role:'게임 디자이너',team_m2_bio:'심리적 공포 메커닉 설계',
-                team_m3_name:'이세계',team_m3_role:'세계관 디자이너',team_m3_bio:'신화적 세계 구축',
-                comm_title:'커뮤니티',comm_intro:'개발 과정에 참여해 보세요',comm_discord:'개발자와 직접 소통',comm_twitter:'빠른 소식 확인',comm_instagram:'아트워크 감상',comm_youtube:'트레일러 시청',
-                footer_about:'오이디푸스적 비극 기반 미스터리 어드벤처. 2026년 출시 예정.',footer_links:'링크',footer_comp:'공모전',footer_contact:'연락처'
-            },
-            en:{
-                nav_about:'About',nav_team:'Team',nav_community:'Community',nav_recruit:'Recruitment',
-                hero_title:'Project OED',hero_sub:'A mystery adventure based on Oedipal tragedy',hero_learn:'Learn More',hero_recruit:'View Recruitment',
-                about_title:'About Project',about_intro:'Where mystery, horror and myth intertwine',about_heading:'Oedipal Tragedy Meets Cthulhu',about_body:'Project OED blends classical Greek tragedy with modern horror.',
-                about_feat1_h:'Mystery & Investigation',about_feat1_b:'Gather clues and solve cases.',about_feat2_h:'Mythological Background',about_feat2_b:'Greco‑Roman and Cthulhu myths reinterpreted.',about_feat3_h:'Lovecraftian Horror',about_feat3_b:'Face the unknown terrors.',
-                team_title:'Meet Our Team',team_intro:'The people behind Project OED',
-                team_m1_name:'Park Iyagi',team_m1_role:'Lead Writer',team_m1_bio:'Specialized in mystery & horror storytelling.',
-                team_m2_name:'Kim Gusang',team_m2_role:'Game Designer',team_m2_bio:'Designing psychological horror mechanics.',
-                team_m3_name:'Lee Segye',team_m3_role:'World Designer',team_m3_bio:'Building a myth‑horror universe.',
-                comm_title:'Community',comm_intro:'Join the development journey',comm_discord:'Chat with developers',comm_twitter:'Get quick updates',comm_instagram:'See artwork',comm_youtube:'Watch trailers',
-                footer_about:'Mystery adventure based on Oedipal tragedy. Coming 2026.',footer_links:'Links',footer_comp:'Competition',footer_contact:'Contact'
-            },
-            ja:{
-                nav_about:'プロジェクト紹介',nav_team:'チーム紹介',nav_community:'コミュニティ',nav_recruit:'採用情報',
-                hero_title:'Project OED',hero_sub:'オイディプス的悲劇を基にしたミステリーアドベンチャー',hero_learn:'詳しく見る',hero_recruit:'採用情報を見る',
-                about_title:'プロジェクト紹介',about_intro:'ミステリーと恐怖、神話が融合する世界',about_heading:'オイディプス悲劇 × クトゥルフ神話',about_body:'Project OEDは古典ギリシャ悲劇と現代ホラーを融合します。',
-                about_feat1_h:'推理とミステリー',about_feat1_b:'手がかりを集め事件を解決。',about_feat2_h:'神話的背景',about_feat2_b:'ギリシャ・ローマとクトゥルフ神話を現代的に再解釈。',about_feat3_h:'ラヴクラフト風ホラー',about_feat3_b:'未知の恐怖に直面。',
-                team_title:'チーム紹介',team_intro:'Project OEDを作る人々',
-                team_m1_name:'パク・イヤギ',team_m1_role:'シナリオライター',team_m1_bio:'ミステリー/ホラーストーリー専門',
-                team_m2_name:'キム・グサン',team_m2_role:'ゲームデザイナー',team_m2_bio:'心理ホラーメカニクス設計',
-                team_m3_name:'イ・セゲ',team_m3_role:'世界観デザイナー',team_m3_bio:'神話ホラー世界構築',
-                comm_title:'コミュニティ',comm_intro:'開発過程に参加しましょう',comm_discord:'開発者と交流',comm_twitter:'速報をチェック',comm_instagram:'アートワーク鑑賞',comm_youtube:'トレーラー視聴',
-                footer_about:'オイディプス的悲劇を基にしたミステリーアドベンチャー。2026年リリース予定。',footer_links:'リンク',footer_comp:'コンテスト',footer_contact:'連絡先'
-            }
-        };
-        function applyLang(lang){
-            document.documentElement.lang=lang;
-            document.documentElement.className='lang-'+lang;
-            langBtn.textContent={ko:'한국어 ▼',en:'English ▼',ja:'日本語 ▼'}[lang];
-            document.querySelectorAll('[data-i18n]').forEach(el=>{
-                const key=el.dataset.i18n; if(translations[lang][key]) el.textContent=translations[lang][key];
-            });
-        }
-        document.querySelectorAll('.lang-list button').forEach(btn=>btn.addEventListener('click',()=>{
-            const lang=btn.dataset.lang;applyLang(lang);localStorage.setItem('preferredLang',lang);
-        }));
-        // init
-        applyLang(localStorage.getItem('preferredLang')||'ko');
-
-        /* smooth anchor – ignore "#" only */
-        document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(a=>a.addEventListener('click',e=>{
-            const id=a.getAttribute('href');const target=document.querySelector(id);
-            if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});nav.classList.remove('show');}
-        }));
-    </script>
-</body>
-</html>
+        .member-bio{color:
