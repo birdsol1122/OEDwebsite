@@ -1,118 +1,289 @@
 <!DOCTYPE html>
 <html lang="ko" class="lang-ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Project OED – Mystery · Horror · Adventure Indie Game"/>
-    <meta name="keywords" content="Indie Game, Mystery Game, Adventure Game, Project OED"/>
-    <title>Project OED – Indie Mystery Adventure</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Project OED – Mystery · Horror · Adventure Indie Game" />
+  <meta name="keywords" content="Indie Game, Mystery Game, Adventure Game, Project OED" />
+  <title>Project OED – Indie Mystery Adventure</title>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=DotGothic16&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=DotGothic16&family=Pixelify+Sans:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <!-- Icons -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    rel="stylesheet" />
 
-    <style>
-        /* ---------------- Root Palette ---------------- */
-        :root{
-            --primary:#e0e0e0;--secondary:#a0a0a0;--accent:#ff3e3e;--accent-hover:#ff5e5e;
-            --bg-dark:#121212;--bg-card:#1a1a1a;--border:#333;--shadow:0 4px 6px rgba(0,0,0,.5)
-        }
-        /* ---------------- Resets ---------------- */
-        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        body{background:var(--bg-dark);color:var(--primary);line-height:1.6;overflow-x:hidden;text-align:center}
-        img{max-width:100%;display:block}
+  <style>
+    /* ---------------- Root Palette ---------------- */
+    :root {
+      --primary: #e0e0e0;
+      --secondary: #a0a0a0;
+      --accent: #ff3e3e;
+      --accent-hover: #ff5e5e;
+      --bg-dark: #121212;
+      --bg-card: #1a1a1a;
+      --border: #333;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    }
 
-        /* ---------------- Analogue Overlays ---------------- */
-        /* Grain */
-        body::before{
-            content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
-            background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVQImWNkYGBg+M+ABAwMAAG5AAHEDu5eAAAAAElFTkSuQmCC") repeat;
-            opacity:.05;
-        }
-        /* Scanline */
-        body::after{
-            content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
-            background:repeating-linear-gradient(0deg,rgba(0,0,0,.15)0 1px,transparent 1px 3px);
-            mix-blend-mode:multiply;opacity:.4;animation:scan 8s linear infinite;
-        }
-        @keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+    /* ---------------- Reset ---------------- */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: var(--bg-dark);
+      color: var(--primary);
+      font-family: "Noto Serif KR", serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      text-align: center;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        /* ---------------- Font per language ---------------- */
-        html.lang-ko{font-family:'Noto Serif KR',serif}
-        html.lang-en{font-family:'Pixelify Sans',sans-serif}
-        html.lang-ja{font-family:'DotGothic16',sans-serif}
+    /* ---------------- Analogue Overlays ---------------- */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVQImWNkYGBg+M+ABAwMAAG5AAHEDu5eAAAAAElFTkSuQmCC")
+        repeat;
+      opacity: 0.05;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15) 0 1px,
+        transparent 1px 3px
+      );
+      mix-blend-mode: multiply;
+      opacity: 0.4;
+      animation: scan 8s linear infinite;
+    }
+    @keyframes scan {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(100%);
+      }
+    }
 
-        /* ---------------- Motion safe / reduced ---------------- */
-        @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+    /* ---------------- Font per language ---------------- */
+    html.lang-en {
+      font-family: "Pixelify Sans", sans-serif;
+    }
+    html.lang-ja {
+      font-family: "DotGothic16", sans-serif;
+    }
 
-        /* ---------------- Glitch effect ---------------- */
-        @keyframes glitch{0%{transform:translate(0)}20%{transform:translate(-2px,2px)}40%{transform:translate(-2px,-2px)}60%{transform:translate(2px,2px)}80%{transform:translate(2px,-2px)}100%{transform:translate(0)}}
-        .glitch{animation:glitch .3s infinite;animation-play-state:paused}
-        .glitch:hover{animation-play-state:running}
-        .glitch-off .glitch,.glitch-off .glitch:hover{animation:none!important}
+    /* ---------------- Motion reduce ---------------- */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
 
-        /* VHS RGB shift */
-        .vhs-shift{position:relative}
-        .vhs-shift::before,.vhs-shift::after{
-            content:attr(data-text);position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;filter:blur(1px);opacity:.6}
-        .vhs-shift::before{left:-1px;color:#ff4242}
-        .vhs-shift::after{left:1px;color:#42aaff}
+    /* ---------------- Glitch ---------------- */
+    @keyframes glitch {
+      0% {
+        transform: translate(0);
+      }
+      20% {
+        transform: translate(-2px, 2px);
+      }
+      40% {
+        transform: translate(-2px, -2px);
+      }
+      60% {
+        transform: translate(2px, 2px);
+      }
+      80% {
+        transform: translate(2px, -2px);
+      }
+      100% {
+        transform: translate(0);
+      }
+    }
+    .glitch {
+      animation: glitch 0.3s infinite;
+      animation-play-state: paused;
+    }
+    .glitch:hover {
+      animation-play-state: running;
+    }
+    .glitch-off .glitch,
+    .glitch-off .glitch:hover {
+      animation: none !important;
+    }
 
-        /* ---------------- Utility ---------------- */
-        .container{max-width:1200px;margin:auto;padding:0 2rem}
-        .hidden{display:none!important}
+    /* VHS RGB Shift */
+    .vhs-shift {
+      position: relative;
+    }
+    .vhs-shift::before,
+    .vhs-shift::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      filter: blur(1px);
+      opacity: 0.6;
+    }
+    .vhs-shift::before {
+      left: -1px;
+      color: #ff4242;
+    }
+    .vhs-shift::after {
+      left: 1px;
+      color: #42aaff;
+    }
 
-        /* ---------------- Header ---------------- */
-        header{background:var(--bg-dark);position:fixed;top:0;left:0;width:100%;z-index:1000;box-shadow:var(--shadow)}
-        nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
-        .logo{display:flex;align-items:center;font-size:1.5rem;text-decoration:none;color:var(--primary)}
-        .mobile-btn{display:none;background:none;border:none;color:var(--primary);font-size:1.5rem}
-        .nav{display:flex;list-style:none;text-align:left}
-        .nav li{margin-left:2rem}
-        .nav a{color:var(--primary);text-decoration:none;font-weight:500;position:relative}
-        .nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s}
-        .nav a:hover::after{transform:scaleX(1)}
+    /* ---------------- Utilities ---------------- */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 2rem;
+    }
 
-        /* Language selector & Glitch toggle */
-        .lang-select{position:relative}
-        .lang-btn,.glitch-toggle{background:none;border:1px solid var(--accent);color:var(--accent);padding:.4rem .8rem;cursor:pointer}
-        .lang-list{position:absolute;right:0;top:calc(100% + .5rem);background:var(--bg-card);border:1px solid var(--border);display:none;text-align:left}
-        .lang-list button{display:block;width:100%;padding:.6rem 1rem;background:none;border:none;color:var(--primary);cursor:pointer}
-        .lang-list button:hover{background:rgba(255,62,62,.1)}
+    /* ---------------- Header ---------------- */
+    header {
+      background: var(--bg-dark);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: var(--primary);
+    }
+    .mobile-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+    .nav {
+      display: flex;
+      list-style: none;
+      text-align: left;
+    }
+    .nav li {
+      margin-left: 2rem;
+    }
+    .nav a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .nav a:hover::after {
+      transform: scaleX(1);
+    }
 
-        /* ---------------- Hero ---------------- */
-        #hero{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding-top:80px}
-        #hero::before{content:"";position:absolute;inset:0;background:url('https://github.com/birdsol1122/OEDwebsite/blob/main/eden_n13_13831_wide_cinematic_matte-painting_ruined_neo-Byzanti_633b17cf-0528-467b-b27a-71a122dbffcc.png?raw=true') center/cover;filter:brightness(.6) contrast(1.2);z-index:-2}
-        #hero h1{font-size:3rem;letter-spacing:4px;margin-bottom:1rem}
-        .hero-text{font-size:1.1rem;margin-bottom:2rem}
-        .btn{display:inline-block;padding:.8rem 1.5rem;border:none;cursor:pointer;text-transform:uppercase;font-weight:600;letter-spacing:1px;background:var(--accent);color:#fff;transition:background .3s;margin:.3rem}
-        .btn:hover{background:var(--accent-hover)}
-        .btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent)}
-        .btn-outline:hover{background:var(--accent);color:#fff}
+    /* Language & Glitch Toggle */
+    .lang-btn,
+    .glitch-toggle {
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+    }
 
-        /* ---------------- Sections ---------------- */
-        section{padding:5rem 0;text-align:center}
-        .section-title h2{font-size:2.2rem;margin-bottom:1rem}
-        .section-title p{color:var(--secondary)}
-
-        /* About */
-        #about .grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;text-align:left}
-        #about img{filter:grayscale(30%) contrast(1.2) brightness(.85)}
-        .feature-list{margin-top:2rem}
-        .feature{display:flex;margin-bottom:1.2rem;align-items:center}
-        .feature i{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(255,62,62,.1);border:1px solid var(--accent);color:var(--accent);margin-right:1rem}
-
-        /* Team */
-        #team{background:var(--bg-card)}
-        .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem;text-align:left}
-        .member{background:rgba(26,26,26,.8);border:1px solid var(--border);box-shadow:var(--shadow);transition:transform .3s}
-        .member:hover{transform:translateY(-6px)}
-        .member img{height:240px;object-fit:contain;padding:2rem;margin:auto}
-        .member-info{padding:1.5rem}
-        .member-info h3{font-size:1.3rem;margin-bottom:.4rem}
-        .member-role{color:var(--accent);font-weight:600;display:block;margin-bottom:.7rem}
-        .member-bio{color:
+    /* ---------------- Hero ---------------- */
+    #hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding-top: 80px;
+    }
+    #hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("https://github.com/birdsol1122/OEDwebsite/blob/main/eden_n13_13831_wide_cinematic_matte-painting_ruined_neo-Byzanti_633b17cf-0528-467b-b27a-71a122dbffcc.png?raw=true")
+        center / cover;
+      filter: brightness(0.6) contrast(1.2);
+      z-index: -2;
+    }
+    #hero h1 {
+      font-size: 3rem;
+      letter-spacing: 4px;
+      margin-bottom: 1rem;
+    }
+    .hero-text {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      background: var(--accent);
+      color: #fff;
+      transition: background 0.3s;
+      margin: 0.3rem;
+    }
+    .btn:hover {
+      background: var(--accent-hover);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+    .btn-outline
