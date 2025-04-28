@@ -632,7 +632,46 @@
         const languageDropdown = document.querySelector('.language-dropdown');
         const languageOptions = document.querySelectorAll('.language-option');
         const htmlElement = document.querySelector('html');
-        const currentLangSpans = document.querySelectorAll('.current-lang');
+        
+        // Switch language function
+        function switchLanguage(lang) {
+            // Hide all language elements
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show elements for selected language
+            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
+                el.classList.add('active');
+            });
+            
+            // Update html lang attribute
+            htmlElement.setAttribute('lang', lang);
+            
+            // Store language preference if localStorage is available
+            try {
+                localStorage.setItem('preferredLanguage', lang);
+            } catch (e) {
+                console.warn('LocalStorage not available');
+            }
+        }
+        
+        // Set initial language
+        document.addEventListener('DOMContentLoaded', function() {
+            // Try to get preferred language from localStorage
+            let lang = 'ko';
+            try {
+                const storedLang = localStorage.getItem('preferredLanguage');
+                if (storedLang) {
+                    lang = storedLang;
+                }
+            } catch (e) {
+                console.warn('LocalStorage not available');
+            }
+            
+            // Apply initial language
+            switchLanguage(lang);
+        });
         
         // Show/hide language dropdown
         languageBtn.addEventListener('click', () => {
@@ -650,29 +689,12 @@
         languageOptions.forEach(option => {
             option.addEventListener('click', () => {
                 const langCode = option.getAttribute('data-lang-code');
-                htmlElement.setAttribute('lang', langCode);
+                switchLanguage(langCode);
                 
                 // Update UI
                 languageDropdown.classList.remove('show');
-                
-                // Store language preference if localStorage is available
-                try {
-                    localStorage.setItem('preferredLanguage', langCode);
-                } catch (e) {
-                    console.warn('LocalStorage not available');
-                }
             });
         });
-        
-        // Load preferred language if localStorage is available
-        try {
-            const preferredLanguage = localStorage.getItem('preferredLanguage');
-            if (preferredLanguage) {
-                htmlElement.setAttribute('lang', preferredLanguage);
-            }
-        } catch (e) {
-            console.warn('LocalStorage not available');
-        }
         
         // Mobile menu functionality
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -777,7 +799,6 @@
     <meta name="description" content="Project OED - 추리, 미스터리, 어드벤처 장르의 인디 게임" />
     <meta name="keywords" content="인디게임, 미스터리 게임, 추리 게임, 어드벤처 게임, 오이디푸스, 크툴루, 호러, Project OED" />
     <title>Project OED - 오이디푸스적 비극의 인디게임</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script>
       (function(d) {
         var config = {
@@ -788,6 +809,7 @@
         h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
       })(document);
     </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #e0e0e0;
@@ -807,6 +829,22 @@
             box-sizing: border-box;
         }
 
+        @font-face {
+            font-family: 'proxima-nova';
+            src: url('https://use.typekit.net/af/949f99/00000000000000003b9b3068/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3') format('woff2'),
+                 url('https://use.typekit.net/af/949f99/00000000000000003b9b3068/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'industry';
+            src: url('https://use.typekit.net/af/33a8f5/00000000000000003b9b0c32/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('woff2'),
+                 url('https://use.typekit.net/af/33a8f5/00000000000000003b9b0c32/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
         body {
             font-family: 'proxima-nova', sans-serif;
             line-height: 1.6;
@@ -814,6 +852,11 @@
             background-color: #121212;
             position: relative;
             overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'industry', 'proxima-nova', sans-serif;
+            font-weight: 700;
         }
 
         body::before {
@@ -1289,11 +1332,20 @@
         }
 
         .retro-text {
-            font-family: 'industry', 'proxima-nova', monospace;
+            font-family: 'industry', 'proxima-nova', sans-serif;
             letter-spacing: 1px;
             line-height: 1.7;
             color: var(--secondary-color);
             margin-bottom: 2rem;
+        }
+
+        /* Hidden content for translations */
+        [data-lang] {
+            display: none;
+        }
+
+        [data-lang].active {
+            display: block;
         }
 
         .feature-list {
