@@ -286,6 +286,13 @@
             width: auto;
             min-width: 180px;
             position: relative;
+            transform: translateY(0);
+        }
+        .btn span {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+            transform: translateY(0);
         }
         .btn::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
@@ -300,16 +307,7 @@
             margin-left: 0; 
             box-shadow: none;
             position: relative;
-        }
-        .btn-outline::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            right: 2px;
-            bottom: 2px;
-            border: 2px solid var(--accent-color);
-            opacity: 0.5;
+            padding: 0 1.5rem;
         }
         .btn-outline:hover { 
             background-color: var(--accent-color); 
@@ -468,7 +466,7 @@
             .btn {
                 width: 100%;
                 text-align: center;
-                padding: 0;
+                padding: 0 1rem;
                 font-size: 0.85rem;
                 min-height: 2.4rem;
                 display: inline-flex;
@@ -482,6 +480,7 @@
 
             .btn-outline {
                 margin-top: 0.2rem;
+                padding: 0 1rem;
             }
             
             .btn-outline::after {
@@ -927,12 +926,12 @@
                 <p class="hero-text" data-lang="en">A mystery adventure game based on Oedipal tragedy.<br>An indie game with a unique world view combining Greco-Roman mythology and Cthulhu mythos.</p>
                 <p class="hero-text" data-lang="ja">オイディプス的悲劇をベースにしたミステリーアドベンチャーゲーム。<br>ギリシャローマ神話とクトゥルフ神話が融合した独特な世界観のインディーゲームです。</p>
                 <div class="hero-buttons">
-                    <a href="#about" class="btn glitch" data-lang="ko">자세히 알아보기</a>
-                    <a href="#about" class="btn glitch" data-lang="en">Learn More</a>
-                    <a href="#about" class="btn glitch" data-lang="ja">詳しく見る</a>
-                    <a href="https://birdsol1122.github.io/projectoed1122/" class="btn btn-outline glitch" target="_blank" data-lang="ko">구인공고 확인</a>
-                    <a href="https://birdsol1122.github.io/projectoed1122/" class="btn btn-outline glitch" target="_blank" data-lang="en">View Recruitment</a>
-                    <a href="https://birdsol1122.github.io/projectoed1122/" class="btn btn-outline glitch" target="_blank" data-lang="ja">採用情報を見る</a>
+                    <a href="#about" class="btn glitch" data-lang="ko"><span>자세히 알아보기</span></a>
+                    <a href="#about" class="btn glitch" data-lang="en"><span>Learn More</span></a>
+                    <a href="#about" class="btn glitch" data-lang="ja"><span>詳しく見る</span></a>
+                    <a href="https://birdsol1122.github.io/projectoed1122/" class="btn btn-outline glitch" target="_blank" data-lang="ko"><span>구인공고 확인</span></a>
+                    <a href="https://birdsol1122.github.io/projectoed1122/" class="btn btn-outline glitch" target="_blank" data-lang="en"><span>View Recruitment</span></a>
+                    <a href="https://birdsol1122.github.io/projectoed1122/" class="btn btn-outline glitch" target="_blank" data-lang="ja"><span>採用情報を見る</span></a>
                 </div>
             </div>
         </div>
