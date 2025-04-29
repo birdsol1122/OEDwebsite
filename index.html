@@ -76,1411 +76,271 @@
             opacity: 0.15;
             mix-blend-mode: screen;
         }
-        /* 글리치 효과 */
-        .glitch { animation: glitch 0.3s infinite; animation-play-state: paused; }
-        .glitch:hover { animation-play-state: running; }
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-        body.glitch-off .glitch { animation: none !important; }
-        /* 헤더, 네비게이션 */
-        header {
-            background-color: var(--dark-bg);
-            color: white;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: var(--shadow);
-            top: 0;
-        }
         nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.95);
+            padding: 1rem 2rem;
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
-            position: relative;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
         }
-        .logo { display: flex; align-items: center; font-weight: bold; font-size: 1.5rem; text-decoration: none; color: var(--primary-color); }
-        .logo-text { text-shadow: var(--text-glow); letter-spacing: 1px; }
+
         .nav-links {
             display: flex;
             list-style: none;
             margin: 0;
             padding: 0;
-        }
-        .nav-links li { margin-left: 2rem; }
-        .nav-link { color: var(--primary-color); text-decoration: none; font-weight: 500; transition: color 0.3s, text-shadow 0.3s; position: relative; letter-spacing: 1px; }
-        .nav-link:hover { color: var(--accent-color); text-shadow: 0 0 8px rgba(255, 62, 62, 0.7); }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            left: 0; bottom: -5px; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            transform: scaleX(0); transition: transform 0.3s;
-        }
-        .nav-link:hover::after { transform: scaleX(1); }
-        .language-selector { position: relative; margin-left: 2rem; font-family: var(--primary-font); }
-        .language-btn {
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            cursor: pointer;
-            display: flex;
             align-items: center;
-            font-weight: 500;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            font-family: var(--primary-font);
-        }
-        .language-btn:focus { outline: none; }
-        .language-btn i { margin-left: 0.5rem; }
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: var(--card-bg);
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            width: 150px;
-            z-index: 10;
-            display: none;
-            font-family: var(--primary-font);
-        }
-        .language-dropdown.show { display: block; }
-        .language-option {
-            padding: 0.75rem 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            display: flex;
-            align-items: center;
-            color: var(--primary-color);
-            font-family: var(--primary-font);
-        }
-        .language-option:hover {
-            background-color: rgba(255, 62, 62, 0.1);
-        }
-        .language-option.active {
-            background-color: var(--accent-color);
-            color: white;
-        }
-        .language-flag {
-            width: 20px;
-            height: 15px;
-            margin-right: 0.75rem;
-        }
-        /* 언어별 폰트 */
-        html[lang="ko"],
-        .language-option[data-lang-code="ko"],
-        .current-lang[data-lang="ko"] {
-            font-family: var(--primary-font) !important;
-        }
-        html[lang="en"],
-        .language-option[data-lang-code="en"],
-        .current-lang[data-lang="en"] {
-            font-family: var(--primary-font) !important;
-        }
-        html[lang="ja"],
-        .language-option[data-lang-code="ja"],
-        .current-lang[data-lang="ja"] {
-            font-family: var(--primary-font) !important;
-        }
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1000;
-        }
-        /* Hero */
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-            background-size: cover;
-            background-position: center;
-            color: var(--text-color);
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://github.com/birdsol1122/OEDwebsite/blob/main/eden_n13_13831_wide_cinematic_matte-painting_ruined_neo-Byzanti_633b17cf-0528-467b-b27a-71a122dbffcc.png?raw=true');
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.5) saturate(0.8);
-            z-index: -1;
-            animation: subtle-zoom 20s infinite alternate;
+        .nav-links li {
+            margin-left: 2rem;
         }
-        .hero-content { max-width: 800px; color: white; text-align: center; position: relative; z-index: 1; }
-        .hero-logo { height: 120px; margin-bottom: 2rem; filter: drop-shadow(0 0 10px rgba(255, 62, 62, 0.7)); }
-        .hero h1 {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            text-shadow: 0 0 10px rgba(255, 62, 62, 0.7),
-                         0 0 20px rgba(255, 62, 62, 0.5),
-                         0 0 40px rgba(255, 62, 62, 0.3);
-            letter-spacing: 8px;
-            font-weight: 900;
-            transform-style: preserve-3d;
-            animation: text-float 6s ease-in-out infinite;
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .nav-links li {
+                margin-left: 0;
+            }
+            
+            .nav-link {
+                font-size: 0.9rem;
+            }
+            
+            .language-selector {
+                margin-left: auto;
+            }
         }
-        @keyframes text-float {
-            0%, 100% { transform: translateY(0) rotateX(0deg); }
-            50% { transform: translateY(-10px) rotateX(2deg); }
+
+        /* 푸터 스타일 */
+        footer {
+            background-color: var(--card-bg);
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
         }
-        .hero-text {
-            font-size: 1.4rem;
-            line-height: 2;
-            margin-bottom: 3rem;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
-            letter-spacing: 2px;
-            opacity: 0;
-            animation: fade-in 2s ease-out forwards 0.5s;
-        }
-        @keyframes fade-in {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .hero-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            text-decoration: none;
-            background-color: var(--accent-color);
-            color: white;
-            border-radius: 0;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s, transform 0.2s, text-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            box-shadow: 0 0 10px rgba(255, 62, 62, 0.5);
-            line-height: 1;
-            padding: 0 1.5rem;
-            height: 3rem;
-        }
-        .btn::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); transition: left 0.6s;
-        }
-        .btn:hover { background-color: var(--accent-hover); text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
-        .btn:hover::before { left: 100%; }
-        .btn-outline { background: transparent; border: 2px solid var(--accent-color); color: var(--accent-color); margin-left: 0; box-shadow: 0 0 10px rgba(255, 62, 62, 0.3); }
-        .btn-outline:hover { background-color: var(--accent-color); color: white; }
-        /* About */
-        .about { background-color: var(--dark-bg); position: relative; padding: 6rem 0; }
-        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; position: relative; z-index: 1; }
-        .about-image { border-radius: 0; overflow: hidden; box-shadow: var(--shadow); position: relative; }
-        .about-image img { width: 100%; height: auto; display: block; filter: grayscale(30%) contrast(1.2) brightness(0.8); }
-        .image-glitch-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, rgba(255, 0, 0, 0.05), rgba(0, 0, 0, 0), rgba(0, 0, 255, 0.05)); pointer-events: none; z-index: 1; }
-        .about-text { color: var(--primary-color); position: relative; }
-        .about-text h3 { font-size: 2rem; margin-bottom: 1.5rem; color: var(--primary-color); letter-spacing: 1px; text-shadow: var(--text-glow); }
-        .retro-text { letter-spacing: 1px; line-height: 1.7; color: var(--secondary-color); margin-bottom: 2rem; }
-        /* 팀 소개 */
-        .team { background-color: var(--card-bg); position: relative; padding: 6rem 0; background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://github.com/birdsol1122/OEDwebsite/blob/main/meric-dagli-vElYIR0sWcM-unsplash.jpg?raw=true'); background-size: cover; background-position: center; background-attachment: fixed; }
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            justify-items: center;
-        }
-        .team-member {
-            max-width: 350px;
-            width: 100%;
-            background-color: rgba(26, 26, 26, 0.8);
-            border: 1px solid var(--border-color);
-            border-radius: 0;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-        .team-member:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 62, 62, 0.3); }
-        .member-image { width: 100%; height: 250px; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.2); position: relative; }
-        .member-image img { max-width: 60%; max-height: 60%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255, 62, 62, 0.5)); }
-        .member-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, rgba(255, 0, 0, 0.1), transparent, rgba(0, 0, 255, 0.1)); pointer-events: none; opacity: 0.3; z-index: 1; }
-        .member-info {
-            padding: 1.5rem;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-        .member-info h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--primary-color); letter-spacing: 1px; text-shadow: var(--text-glow); }
-        .member-role { color: var(--accent-color); font-weight: 600; margin-bottom: 1rem; display: block; letter-spacing: 1px; text-shadow: 0 0 5px rgba(255, 62, 62, 0.5); }
-        .member-bio { color: var(--secondary-color); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.6; letter-spacing: 0.5px; }
-        .social-links { display: flex; }
-        .social-link { width: 36px; height: 36px; border-radius: 0; background-color: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; margin-right: 0.5rem; color: var(--primary-color); text-decoration: none; transition: background-color 0.3s, color 0.3s, transform 0.2s; border: 1px solid var(--accent-color); }
-        .social-link:hover { background-color: var(--accent-color); color: white; transform: scale(1.1); }
-        .team-others {
-            text-align: center;
-            background-color: rgba(26, 26, 26, 0.6);
-            padding: 1.5rem;
-        }
-        .team-others .member-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .team-others .btn {
-            width: auto;
-            min-width: 180px;
-            max-width: 100%;
-            margin: 1.5rem auto 0;
-        }
-        .others-image { display: flex; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.3); }
-        .others-icon { font-size: 5rem; color: var(--accent-color); opacity: 0.7; animation: flicker 8s infinite; }
-        /* 푸터 */
-        footer { background-color: #0a0a0a; color: white; padding: 4rem 0 2rem; position: relative; overflow: hidden; }
-        .glitch-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('https://github.com/birdsol1122/OEDwebsite/blob/main/meric-dagli-vElYIR0sWcM-unsplash.jpg?raw=true'); background-size: cover; background-position: center; opacity: 0.15; z-index: 0; }
+
         .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             gap: 2rem;
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
         }
-        .footer-logo { margin-bottom: 1rem; display: inline-flex; align-items: center; color: var(--primary-color); text-decoration: none; letter-spacing: 1px; text-shadow: var(--text-glow); }
-        .footer-about p { margin-bottom: 1.5rem; color: var(--secondary-color); font-size: 0.95rem; letter-spacing: 0.5px; }
-        .footer-title { font-size: 1.25rem; margin-bottom: 1.5rem; position: relative; color: var(--primary-color); letter-spacing: 1px; text-shadow: var(--text-glow); }
-        .footer-title::after { content: ''; display: block; width: 30px; height: 1px; background-color: var(--accent-color); margin-top: 0.75rem; box-shadow: 0 0 10px rgba(255, 62, 62, 0.5); }
-        .footer-links-column {
+
+        .footer-logo {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            gap: 1rem;
         }
-        .footer-links {
+
+        .footer-logo h2 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .footer-logo p {
+            color: var(--secondary-color);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin: 0 0 1rem 0;
+            color: var(--primary-color);
+        }
+
+        .footer-links ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-        .footer-links li { margin-bottom: 0.75rem; }
-        .footer-link { color: var(--secondary-color); text-decoration: none; transition: color 0.3s, text-shadow 0.3s; letter-spacing: 0.5px; position: relative; display: inline-block; }
-        .footer-link::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 100%; height: 1px; background-color: var(--accent-color); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
-        .footer-link:hover { color: var(--accent-color); text-shadow: 0 0 5px rgba(255, 62, 62, 0.5); }
-        .footer-link:hover::after { transform: scaleX(1); }
-        .copyright { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #333; color: var(--secondary-color); position: relative; z-index: 1; font-size: 0.9rem; }
-        /* 반응형 */
-        @media (max-width: 992px) {
-            .about-content { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
-            .footer-about { display: flex; flex-direction: column; align-items: center; }
-            .footer-logo { justify-content: center; }
-            .footer-links { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
-            .footer-title::after { margin: 0.75rem auto 0; }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
         }
-        @media (max-width: 768px) {
-            .hero h1 { 
-                font-size: 2.2rem; 
-                letter-spacing: 3px;
-                margin-bottom: 1rem;
-            }
-            
-            .hero-text {
-                font-size: 0.95rem;
-                line-height: 1.5;
-                padding: 0 1rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                gap: 0.6rem;
-                padding: 0 1rem;
-                width: 100%;
-                max-width: 240px;
-                margin: 0 auto;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-                padding: 0;
-                font-size: 0.85rem;
-                min-height: 2.4rem;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                margin: 0;
-                line-height: 1;
-                height: 2.4rem;
-            }
 
-            .btn-outline {
-                margin-top: 0.2rem;
-            }
-            
-            nav {
-                padding: 0.8rem 1rem;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-                order: 3;
-                z-index: 1001;
-            }
-
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                height: auto;
-                background-color: rgba(18, 18, 18, 0.95);
-                flex-direction: column;
-                align-items: center;
-                padding: 1rem 0;
-                z-index: 1000;
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-                margin: 0;
-                padding: 0.5rem 0;
-            }
-            
-            .nav-link {
-                display: block;
-                padding: 0.5rem 0;
-                font-size: 1.1rem;
-            }
-            
-            .language-selector {
-                order: 2;
-                margin-right: 1rem;
-            }
-            
-            .language-btn {
-                padding: 0.4rem;
-                font-size: 0.8rem;
-                height: 30px;
-                display: flex;
-                align-items: center;
-                white-space: nowrap;
-            }
-            
-            .language-dropdown {
-                position: absolute;
-                top: calc(100% + 5px);
-                right: 0;
-                width: 120px;
-                background-color: var(--card-bg);
-                border: 1px solid var(--border-color);
-                z-index: 1000;
-            }
-            
-            .team-member {
-                margin: 1rem;
-                max-width: calc(100% - 2rem);
-            }
-            
-            .team-others {
-                padding: 1.2rem;
-            }
-            
-            .team-others .btn {
-                width: calc(100% - 2rem);
-                max-width: 200px;
-                margin: 1.2rem auto 0.5rem;
-                font-size: 0.85rem;
-                padding: 0.6rem 1rem;
-            }
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s;
         }
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-                letter-spacing: 2px;
-            }
-            
-            .hero-text {
-                font-size: 0.85rem;
-                padding: 0 0.8rem;
-                margin-bottom: 1.2rem;
-            }
-            
-            .hero-buttons {
-                padding: 0 0.8rem;
-                max-width: 220px;
-                gap: 0.5rem;
-            }
-            
-            .btn {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.8rem;
-                min-height: 2.2rem;
-            }
 
-            .btn-outline {
-                margin-top: 0.1rem;
-            }
-
-            .cassette-btn {
-                bottom: 12px;
-                left: 12px;
-                transform: scale(0.65);
-            }
-
-            .language-btn {
-                font-size: 0.75rem;
-                height: 28px;
-            }
-
-            .language-option {
-                padding: 0.4rem;
-                font-size: 0.75rem;
-            }
-
-            .team-member {
-                margin: 0.8rem;
-                max-width: calc(100% - 1.6rem);
-            }
-
-            .team-others {
-                padding: 1rem;
-            }
-
-            .team-others .btn {
-                width: calc(100% - 1.6rem);
-                max-width: 180px;
-                font-size: 0.8rem;
-                padding: 0.5rem 0.8rem;
-                margin: 1rem auto 0.4rem;
-            }
-
-            .language-dropdown {
-                right: 0;
-                width: 110px;
-            }
-
-            .language-option {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.75rem;
-            }
+        .footer-links a:hover {
+            color: var(--accent-color);
         }
-        /* 터치 최적화 */
-        @media (hover: none) {
-            .btn:hover {
-                transform: none;
-            }
-            
-            .nav-link:hover::after {
-                transform: none;
-            }
-            
-            .team-member:hover {
-                transform: none;
-            }
-            
-            .social-link:hover {
-                transform: none;
-            }
+
+        .footer-contact h3 {
+            font-size: 1.2rem;
+            margin: 0 0 1rem 0;
+            color: var(--primary-color);
         }
-        /* 성능 최적화 */
-        @media (max-width: 768px) {
-            .hero::before {
-                animation: none;
-            }
-            
-            .glitch {
-                animation: none;
-            }
+
+        .footer-contact p {
+            color: var(--secondary-color);
+            margin: 0 0 0.5rem 0;
         }
-        /* 모바일 터치 영역 개선 */
-        @media (max-width: 768px) {
-            .nav-link, .footer-link, .btn {
-                padding: 0.8rem 1rem;
-                margin: 0.2rem 0;
-            }
-            
-            .social-link {
-                width: 44px;
-                height: 44px;
-                margin: 0 0.3rem;
-            }
+
+        /* 메인 버튼 스타일 */
+        .main-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
         }
-        /* 언어별 표시 */
-        [data-lang] { display: none; }
-        [data-lang="ko"] { display: block; }
-        html[lang="en"] [data-lang="en"] { display: block; }
-        html[lang="en"] [data-lang="ko"], html[lang="en"] [data-lang="ja"] { display: none; }
-        html[lang="ja"] [data-lang="ja"] { display: block; }
-        html[lang="ja"] [data-lang="ko"], html[lang="ja"] [data-lang="en"] { display: none; }
-        html[lang="ko"] [data-lang="ko"] { display: block; }
-        html[lang="ko"] [data-lang="en"], html[lang="ko"] [data-lang="ja"] { display: none; }
-        /* 재생 버튼 심플 스타일 */
-        .cassette-btn {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            z-index: 2001;
-            background: none;
+
+        .main-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            height: 60px;
+            text-align: center;
             border: none;
             cursor: pointer;
-            opacity: 0.7;
-            transition: all 0.3s ease;
         }
 
-        .cassette-btn i {
-            font-size: 2.5rem;
-            color: #d64545;  /* 빈티지한 레드 컬러로 변경 */
-            text-shadow: 0 0 15px rgba(214, 69, 69, 0.5);
-            transition: all 0.3s ease;
-            filter: saturate(85%) brightness(95%);  /* 빈티지한 느낌을 위한 필터 추가 */
-        }
-
-        .cassette-btn:hover {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-
-        .cassette-btn:hover i {
-            text-shadow: 0 0 20px rgba(214, 69, 69, 0.8);
-            filter: saturate(100%) brightness(100%);
-        }
-
-        .cassette-btn .fa-play { display: block; }
-        .cassette-btn .fa-pause { display: none; }
-        .cassette-btn.playing .fa-play { display: none; }
-        .cassette-btn.playing .fa-pause { display: block; }
-
-        .pixel-btn {
-            width: 40px;
-            height: 40px;
-            background-color: var(--accent-color);
-            position: relative;
-            clip-path: polygon(
-                0% 0%, 12.5% 0%, 12.5% 12.5%, 25% 12.5%, 25% 0%, 
-                37.5% 0%, 37.5% 12.5%, 50% 12.5%, 50% 0%, 
-                62.5% 0%, 62.5% 12.5%, 75% 12.5%, 75% 0%, 
-                87.5% 0%, 87.5% 12.5%, 100% 12.5%, 100% 25%, 
-                87.5% 25%, 87.5% 37.5%, 100% 37.5%, 100% 50%, 
-                87.5% 50%, 87.5% 62.5%, 100% 62.5%, 100% 75%, 
-                87.5% 75%, 87.5% 87.5%, 100% 87.5%, 100% 100%, 
-                87.5% 100%, 75% 100%, 75% 87.5%, 62.5% 87.5%, 
-                62.5% 100%, 50% 100%, 50% 87.5%, 37.5% 87.5%, 
-                37.5% 100%, 25% 100%, 25% 87.5%, 12.5% 87.5%, 
-                12.5% 100%, 0% 100%, 0% 87.5%, 12.5% 87.5%, 
-                12.5% 75%, 0% 75%, 0% 62.5%, 12.5% 62.5%, 
-                12.5% 50%, 0% 50%, 0% 37.5%, 12.5% 37.5%, 
-                12.5% 25%, 0% 25%, 0% 12.5%, 12.5% 12.5%, 12.5% 0%
-            );
-            box-shadow: 0 0 10px rgba(255, 62, 62, 0.5);
-        }
-
-        .pixel-btn::before {
-            content: '';
-            position: absolute;
-            width: 60%;
-            height: 60%;
-            top: 20%;
-            left: 20%;
-            background-color: var(--dark-bg);
-            clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-            transition: clip-path 0.3s ease;
-        }
-
-        .cassette-btn.playing .pixel-btn::before {
-            clip-path: polygon(0% 0%, 40% 0%, 40% 100%, 60% 100%, 60% 0%, 100% 0%, 100% 100%, 0% 100%);
-        }
-
-        .cassette-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .cassette-btn:hover .pixel-btn {
-            box-shadow: 0 0 15px rgba(255, 62, 62, 0.8);
+        .main-button:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
         @media (max-width: 768px) {
-            .cassette-btn {
-                bottom: 20px;
-                left: 20px;
-                transform: scale(0.9);
+            .main-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-button {
+                width: 100%;
+                max-width: 300px;
+                height: 50px;
+                font-size: 0.9rem;
             }
         }
 
-        /* 준비중 섹션 스타일 */
-        .coming-soon {
-            background: var(--dark-bg);
-            padding: 8rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
 
-        .coming-soon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255, 62, 62, 0.1), transparent);
-            pointer-events: none;
-        }
+            .footer-logo {
+                align-items: center;
+            }
 
-        .coming-soon-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .coming-soon h2 {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            color: var(--primary-color);
-            text-shadow: 0 0 15px rgba(255, 62, 62, 0.5);
-        }
-
-        .coming-soon p {
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .coming-soon .glitch-text {
-            position: relative;
-            display: inline-block;
-            animation: coming-soon-flicker 4s infinite;
-        }
-
-        @keyframes coming-soon-flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        .film-grain {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 9997;
-            /* 여기에 배경 효과 등 추가 */
-        }
-
-        /* 스캔라인 효과 */
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 9996;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.2) 0px,
-                rgba(0, 0, 0, 0.2) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            animation: scanline-move 10s linear infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes scanline-move {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100vh); }
-        }
-
-        /* 이미지 플리커 효과 */
-        .flicker {
-            animation: image-flicker 4s infinite;
-        }
-
-        @keyframes image-flicker {
-            0% { opacity: 1; }
-            5% { opacity: 0.8; }
-            10% { opacity: 1; }
-            15% { opacity: 0.9; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            85% { opacity: 0.8; }
-            90% { opacity: 1; }
-            95% { opacity: 0.9; }
-            100% { opacity: 1; }
-        }
-
-        /* 랜덤 글리치 효과 */
-        .random-glitch {
-            animation: random-glitch-effect 0.2s infinite;
-            animation-play-state: paused;
-        }
-
-        .random-glitch.active {
-            animation-play-state: running;
-        }
-
-        @keyframes random-glitch-effect {
-            0% { transform: translate(0); }
-            25% { transform: translate(-5px, 5px); filter: hue-rotate(90deg); }
-            50% { transform: translate(5px, -5px); filter: hue-rotate(-90deg); }
-            75% { transform: translate(-5px, -5px); filter: hue-rotate(180deg); }
-            100% { transform: translate(0); filter: hue-rotate(0); }
-        }
-
-        /* 호버 글리치 효과 강화 */
-        .glitch:hover {
-            animation: hover-glitch 0.3s infinite;
-            text-shadow: 
-                2px 0 var(--accent-color),
-                -2px 0 cyan;
-        }
-
-        @keyframes hover-glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
+            .footer-links, .footer-contact {
+                margin-top: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- VHS 노이즈 SVG 오버레이 제거 -->
-    <!-- 재생 버튼 -->
-    <button class="cassette-btn" id="cassetteBtn" title="배경음악 재생/정지">
-        <i class="fas fa-play"></i>
-        <i class="fas fa-pause"></i>
-    </button>
-    <!-- 음악 플레이어 -->
-    <audio id="bgm" src="https://github.com/birdsol1122/OEDwebsite/blob/main/0428.MP3?raw=true" loop></audio>
-    <!-- 새로운 시각 효과들 -->
-    <div class="chromatic-aberration"></div>
-    <div class="vignette"></div>
-    <div class="scanlines"></div>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo glitch">
-                    <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo.png?raw=true" alt="Project OED Logo" style="height: 40px; margin-right: 10px; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));">
-                    <span class="logo-text">Project OED</span>
-                </a>
-                <button class="mobile-menu-btn" aria-label="메뉴 열기">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="nav-links">
-                    <li><a href="#about" class="nav-link" data-lang="ko">프로젝트 소개</a>
-                        <a href="#about" class="nav-link" data-lang="en">About</a>
-                        <a href="#about" class="nav-link" data-lang="ja">プロジェクト紹介</a>
-                    </li>
-                    <li><a href="#team" class="nav-link" data-lang="ko">팀 소개</a>
-                        <a href="#team" class="nav-link" data-lang="en">Team</a>
-                        <a href="#team" class="nav-link" data-lang="ja">チーム紹介</a>
-                    </li>
-                    <li><a href="#community" class="nav-link" data-lang="ko">커뮤니티</a>
-                        <a href="#community" class="nav-link" data-lang="en">Community</a>
-                        <a href="#community" class="nav-link" data-lang="ja">コミュニティ</a>
-                    </li>
-                    <li><a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="nav-link" data-lang="ko">구인공고</a>
-                        <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="nav-link" data-lang="en">Recruitment</a>
-                        <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="nav-link" data-lang="ja">採用情報</a>
-                    </li>
-                </ul>
-                <div class="language-selector">
-                    <button class="language-btn">
-                        <span class="current-lang" data-lang="ko">한국어</span>
-                        <span class="current-lang" data-lang="en">English</span>
-                        <span class="current-lang" data-lang="ja">日本語</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="language-dropdown">
-                        <div class="language-option" data-lang-code="ko"><span class="language-flag">🇰🇷</span> 한국어</div>
-                        <div class="language-option" data-lang-code="en"><span class="language-flag">🇺🇸</span> English</div>
-                        <div class="language-option" data-lang-code="ja"><span class="language-flag">🇯🇵</span> 日本語</div>
-                    </div>
-                </div>
-            </nav>
+    <nav>
+        <div class="logo">
+            <a href="#" class="nav-link">Project OED</a>
         </div>
-    </header>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="glitch" data-lang="ko">Project OED</h1>
-                <h1 class="glitch" data-lang="en">Project OED</h1>
-                <h1 class="glitch" data-lang="ja">Project OED</h1>
-                <p class="hero-text" data-lang="ko">오이디푸스적 비극을 기반으로 한 미스터리 어드벤처 게임.<br>그리스로마 신화와 크툴루 신화가 혼합된 독특한 세계관의 인디게임입니다.</p>
-                <p class="hero-text" data-lang="en">A mystery adventure game based on Oedipal tragedy.<br>An indie game with a unique world view combining Greco-Roman mythology and Cthulhu mythos.</p>
-                <p class="hero-text" data-lang="ja">オイディプス的悲劇をベースにしたミステリーアドベンチャーゲーム。<br>ギリシャローマ神話とクトゥルフ神話が融合した独特な世界観のインディーゲームです。</p>
-                <div class="hero-buttons">
-                    <a href="#about" class="btn glitch" data-lang="ko">자세히 알아보기</a>
-                    <a href="#about" class="btn glitch" data-lang="en">Learn More</a>
-                    <a href="#about" class="btn glitch" data-lang="ja">詳しく見る</a>
-                    <a href="https://birdsol1122.github.io/projectoed1122/" class="btn btn-outline glitch" target="_blank" data-lang="ko">구인공고 확인</a>
-                    <a href="https://birdsol1122.github.io/projectoed1122/" class="btn btn-outline glitch" target="_blank" data-lang="en">View Recruitment</a>
-                    <a href="https://birdsol1122.github.io/projectoed1122/" class="btn btn-outline glitch" target="_blank" data-lang="ja">採用情報を見る</a>
-                </div>
-            </div>
+        <ul class="nav-links">
+            <li><a href="#about" class="nav-link" data-lang="ko">프로젝트 소개</a>
+            <a href="#about" class="nav-link" data-lang="en">About</a>
+            <a href="#about" class="nav-link" data-lang="ja">プロジェクト紹介</a></li>
+            <li><a href="#team" class="nav-link" data-lang="ko">팀 소개</a>
+            <a href="#team" class="nav-link" data-lang="en">Team</a>
+            <a href="#team" class="nav-link" data-lang="ja">チーム紹介</a></li>
+            <li><a href="#community" class="nav-link" data-lang="ko">커뮤니티</a>
+            <a href="#community" class="nav-link" data-lang="en">Community</a>
+            <a href="#community" class="nav-link" data-lang="ja">コミュニティ</a></li>
+            <li><a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="nav-link" data-lang="ko">구인공고</a>
+            <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="nav-link" data-lang="en">Recruitment</a>
+            <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="nav-link" data-lang="ja">採用情報</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="main-buttons">
+            <a href="#about" class="main-button" data-lang="ko">자세히 알아보기</a>
+            <a href="#about" class="main-button" data-lang="en">Learn More</a>
+            <a href="#about" class="main-button" data-lang="ja">詳細を見る</a>
+            
+            <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="main-button" data-lang="ko">구인공고 확인</a>
+            <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="main-button" data-lang="en">View Recruitment</a>
+            <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="main-button" data-lang="ja">採用情報を確認</a>
+            
+            <a href="#join" class="main-button" data-lang="ko">팀에 합류하기</a>
+            <a href="#join" class="main-button" data-lang="en">Join the Team</a>
+            <a href="#join" class="main-button" data-lang="ja">チームに参加</a>
         </div>
-    </section>
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-title">
-                <h2 class="glitch" data-lang="ko">프로젝트 소개</h2>
-                <h2 class="glitch" data-lang="en">About Project</h2>
-                <h2 class="glitch" data-lang="ja">プロジェクト紹介</h2>
-                <p data-lang="ko">미스터리와 공포, 신화적 요소가 어우러진 Project OED의 세계를 소개합니다</p>
-                <p data-lang="en">Introducing the world of Project OED where mystery, horror, and mythological elements intertwine</p>
-                <p data-lang="ja">ミステリーと恐怖、神話的要素が融合するProject OEDの世界をご紹介します</p>
-            </div>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/santiago-avila-caro-JMcrYyCjAog-unsplash.jpg?raw=true" alt="Project OED Game Screenshot" class="flicker">
-                    <div class="image-glitch-overlay"></div>
-                </div>
-                <div class="about-text">
-                    <h3 class="glitch" data-lang="ko">오이디푸스적 비극과 크툴루 신화의 만남</h3>
-                    <h3 class="glitch" data-lang="en">Oedipal Tragedy Meets Cthulhu Mythos</h3>
-                    <h3 class="glitch" data-lang="ja">オイディプス的悲劇とクトゥルフ神話の融合</h3>
-                    <p class="retro-text" data-lang="ko">Project OED는 고전 그리스 비극의 정서를 현대적 호러 요소와 결합한 독특한 스토리텔링 경험을 제공합니다. 플레이어는 미스터리한 사건에 휘말린 주인공이 되어 오컬트적 요소가 가득한 세계를 탐험하게 됩니다.</p>
-                    <p class="retro-text" data-lang="en">Project OED offers a unique storytelling experience that combines the sensibility of classical Greek tragedy with modern horror elements. Players become protagonists embroiled in mysterious incidents, exploring a world full of occult elements.</p>
-                    <p class="retro-text" data-lang="ja">Project OEDは、古典ギリシャ悲劇の情緒を現代的ホラー要素と組み合わせた独特なストーリーテリング体験を提供します。プレイヤーは謎めいた事件に巻き込まれた主人公となり、オカルト的要素に満ちた世界を探検することになります。</p>
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fas fa-search"></i></div>
-                            <div class="feature-text">
-                                <h4 class="glitch" data-lang="ko">추리와 미스터리</h4>
-                                <h4 class="glitch" data-lang="en">Mystery & Investigation</h4>
-                                <h4 class="glitch" data-lang="ja">推理とミステリー</h4>
-                                <p data-lang="ko">복잡한 사건을 해결하기 위해 단서를 수집하고 추리하는 게임플레이</p>
-                                <p data-lang="en">Gameplay that involves collecting clues and reasoning to solve complex cases</p>
-                                <p data-lang="ja">複雑な事件を解決するために手がかりを集め、推理するゲームプレイ</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fas fa-book"></i></div>
-                            <div class="feature-text">
-                                <h4 class="glitch" data-lang="ko">신화적 배경</h4>
-                                <h4 class="glitch" data-lang="en">Mythological Background</h4>
-                                <h4 class="glitch" data-lang="ja">神話的背景</h4>
-                                <p data-lang="ko">그리스로마 신화와 크툴루 신화의 요소가 현대적으로 재해석된 세계관</p>
-                                <p data-lang="en">A world view where elements of Greco-Roman mythology and Cthulhu mythos are reinterpreted in a modern way</p>
-                                <p data-lang="ja">ギリシャローマ神話とクトゥルフ神話の要素が現代的に再解釈された世界観</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fas fa-ghost"></i></div>
-                            <div class="feature-text">
-                                <h4 class="glitch" data-lang="ko">러브크래프트풍 호러</h4>
-                                <h4 class="glitch" data-lang="en">Lovecraftian Horror</h4>
-                                <h4 class="glitch" data-lang="ja">ラヴクラフト風ホラー</h4>
-                                <p data-lang="ko">알 수 없는 공포와 불안감을 자아내는 독특한 분위기의 호러 요소</p>
-                                <p data-lang="en">Horror elements with a unique atmosphere that evoke unknown fears and anxiety</p>
-                                <p data-lang="ja">未知の恐怖と不安感を呼び起こす独特な雰囲気のホラー要素</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Team Section -->
-    <section id="team" class="team">
-        <div class="container">
-            <div class="section-title">
-                <h2 class="glitch" data-lang="ko">팀 소개</h2>
-                <h2 class="glitch" data-lang="en">Meet Our Team</h2>
-                <h2 class="glitch" data-lang="ja">チーム紹介</h2>
-                <p data-lang="ko">Project OED를 만들어가는 열정적인 개발자들을 소개합니다</p>
-                <p data-lang="en">Introducing the passionate developers creating Project OED</p>
-                <p data-lang="ja">Project OEDを作り上げる情熱的な開発者たちをご紹介します</p>
-            </div>
-            <div class="team-grid">
-                <!-- 팀원 1 -->
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="Team Member">
-                        <div class="member-overlay"></div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="glitch" data-lang="ko">박이야기</h3>
-                        <h3 class="glitch" data-lang="en">Park Iyagi</h3>
-                        <h3 class="glitch" data-lang="ja">パク・イヤギ</h3>
-                        <span class="member-role" data-lang="ko">시나리오 작가</span>
-                        <span class="member-role" data-lang="en">Lead Writer</span>
-                        <span class="member-role" data-lang="ja">シナリオライター</span>
-                        <p class="member-bio retro-text" data-lang="ko">미스터리와 호러 장르에 특화된 스토리텔링. 오이디푸스적 비극과 크툴루 신화의 결합을 통해 독창적인 세계관 구축.</p>
-                        <p class="member-bio retro-text" data-lang="en">Storytelling specialized in mystery and horror genres. Creating a unique world view through the combination of Oedipal tragedy and Cthulhu mythos.</p>
-                        <p class="member-bio retro-text" data-lang="ja">ミステリーとホラージャンルに特化したストーリーテリング。オイディプス的悲劇とクトゥルフ神話の結合を通じて独創的な世界観を構築。</p>
-                        <div class="social-links">
-                            <a href="#" class="social-link glitch"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link glitch"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- 팀원 2 -->
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="Team Member">
-                        <div class="member-overlay"></div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="glitch" data-lang="ko">김구상</h3>
-                        <h3 class="glitch" data-lang="en">Kim Gusang</h3>
-                        <h3 class="glitch" data-lang="ja">キム・グサン</h3>
-                        <span class="member-role" data-lang="ko">게임 디자이너</span>
-                        <span class="member-role" data-lang="en">Game Designer</span>
-                        <span class="member-role" data-lang="ja">ゲームデザイナー</span>
-                        <p class="member-bio retro-text" data-lang="ko">미스터리 추리 게임 메커닉 설계. 플레이어의 심리적 공포와 긴장감을 극대화하는 게임플레이 디자인.</p>
-                        <p class="member-bio retro-text" data-lang="en">Design of mystery investigation game mechanics. Gameplay design that maximizes player's psychological horror and tension.</p>
-                        <p class="member-bio retro-text" data-lang="ja">ミステリー推理ゲームメカニクス設計。プレイヤーの心理的恐怖と緊張感を極大化するゲームプレイデザイン。</p>
-                        <div class="social-links">
-                            <a href="#" class="social-link glitch"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-link glitch"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- 팀원 3 -->
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo1.png?raw=true" alt="Team Member">
-                        <div class="member-overlay"></div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="glitch" data-lang="ko">이세계</h3>
-                        <h3 class="glitch" data-lang="en">Lee Segye</h3>
-                        <h3 class="glitch" data-lang="ja">イ・セゲ</h3>
-                        <span class="member-role" data-lang="ko">세계관 디자이너</span>
-                        <span class="member-role" data-lang="en">World Designer</span>
-                        <span class="member-role" data-lang="ja">世界観デザイナー</span>
-                        <p class="member-bio retro-text" data-lang="ko">그리스로마 신화와 크툴루 신화의 현대적 재해석. 신화적 요소와 호러가 어우러진 독특한 세계관 창조.</p>
-                        <p class="member-bio retro-text" data-lang="en">Modern reinterpretation of Greco-Roman mythology and Cthulhu mythos. Creating a unique world view where mythological elements and horror blend together.</p>
-                        <p class="member-bio retro-text" data-lang="ja">ギリシャローマ神話とクトゥルフ神話の現代的再解釈。神話的要素とホラーが調和した独特な世界観創造。</p>
-                        <div class="social-links">
-                            <a href="#" class="social-link glitch"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link glitch"><i class="fab fa-medium-m"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- 기타 팀원 -->
-                <div class="team-member team-others">
-                    <div class="member-image others-image">
-                        <div class="others-icon"><i class="fas fa-users"></i></div>
-                        <div class="member-overlay"></div>
-                    </div>
-                    <div class="member-info">
-                        <h3 class="glitch" data-lang="ko">그리고 더 많은 팀원들...</h3>
-                        <h3 class="glitch" data-lang="en">And Many More...</h3>
-                        <h3 class="glitch" data-lang="ja">そして多くのチームメンバー...</h3>
-                        <p class="member-bio retro-text" data-lang="ko">프로그래머, 아티스트, 사운드 디자이너 등 Project OED를 함께 만들어가는 열정적인 창작자들이 함께합니다.</p>
-                        <p class="member-bio retro-text" data-lang="en">Programmers, artists, sound designers, and many other passionate creators are working together to create Project OED.</p>
-                        <p class="member-bio retro-text" data-lang="ja">プログラマー、アーティスト、サウンドデザイナーなど、Project OEDを一緒に作り上げる情熱的なクリエイターたちが集まっています。</p>
-                        <a href="https://birdsol1122.github.io/projectoed1122/" class="btn glitch" target="_blank" data-lang="ko">팀에 합류하기</a>
-                        <a href="https://birdsol1122.github.io/projectoed1122/" class="btn glitch" target="_blank" data-lang="en">Join Our Team</a>
-                        <a href="https://birdsol1122.github.io/projectoed1122/" class="btn glitch" target="_blank" data-lang="ja">チームに参加</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Community Section -->
-    <section id="community" class="coming-soon">
-        <div class="container">
-            <div class="coming-soon-content">
-                <h2 class="glitch" data-lang="ko">커뮤니티 <span class="glitch-text">준비중</span></h2>
-                <h2 class="glitch" data-lang="en">Community <span class="glitch-text">Coming Soon</span></h2>
-                <h2 class="glitch" data-lang="ja">コミュニティ <span class="glitch-text">準備中</span></h2>
-                
-                <p data-lang="ko">Project OED의 커뮤니티가 곧 여러분을 찾아갑니다.<br>더 나은 소통과 교류의 장을 준비하고 있으니 조금만 기다려주세요.</p>
-                <p data-lang="en">Project OED community is coming to you soon.<br>We are preparing a better place for communication and exchange.</p>
-                <p data-lang="ja">Project OEDのコミュニティが間もなく皆様のもとへ。<br>より良いコミュニケーションと交流の場を準備しておりますので、今しばらくお待ちください。</p>
-            </div>
-        </div>
-    </section>
-    <!-- Footer -->
+        <!-- Rest of the content -->
+    </div>
     <footer>
-        <div class="glitch-overlay"></div>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <a href="#" class="footer-logo glitch">
-                        <img src="https://github.com/birdsol1122/OEDwebsite/blob/main/logo.png?raw=true" alt="Project OED Logo" style="height: 40px; margin-right: 10px; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));">
-                        <span>Project OED</span>
-                    </a>
-                    <p class="retro-text" data-lang="ko">오이디푸스적 비극을 기반으로 한 미스터리 어드벤처 게임. 2026년 출시 예정.</p>
-                    <p class="retro-text" data-lang="en">A mystery adventure game based on Oedipal tragedy. Coming in 2026.</p>
-                    <p class="retro-text" data-lang="ja">オイディプス的悲劇をベースにしたミステリーアドベンチャーゲーム。2026年リリース予定。</p>
-                </div>
-                <div class="footer-links-column">
-                    <h3 class="footer-title glitch" data-lang="ko">사이트맵</h3>
-                    <h3 class="footer-title glitch" data-lang="en">Sitemap</h3>
-                    <h3 class="footer-title glitch" data-lang="ja">サイトマップ</h3>
-                    <ul class="footer-links">
-                        <li><a href="#about" class="footer-link" data-lang="ko">프로젝트 소개</a>
-                            <a href="#about" class="footer-link" data-lang="en">About</a>
-                            <a href="#about" class="footer-link" data-lang="ja">プロジェクト紹介</a>
-                        </li>
-                        <li><a href="#team" class="footer-link" data-lang="ko">팀 소개</a>
-                            <a href="#team" class="footer-link" data-lang="en">Team</a>
-                            <a href="#team" class="footer-link" data-lang="ja">チーム紹介</a>
-                        </li>
-                        <li><a href="#community" class="footer-link" data-lang="ko">커뮤니티</a>
-                            <a href="#community" class="footer-link" data-lang="en">Community</a>
-                            <a href="#community" class="footer-link" data-lang="ja">コミュニティ</a>
-                        </li>
-                        <li><a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="footer-link" data-lang="ko">구인공고</a>
-                            <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="footer-link" data-lang="en">Recruitment</a>
-                            <a href="https://birdsol1122.github.io/projectoed1122/" target="_blank" class="footer-link" data-lang="ja">採用情報</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-links-column">
-                    <h3 class="footer-title glitch" data-lang="ko">연락처</h3>
-                    <h3 class="footer-title glitch" data-lang="en">Contact</h3>
-                    <h3 class="footer-title glitch" data-lang="ja">連絡先</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:birdsol1122@gmail.com" class="footer-link">birdsol1122@gmail.com</a></li>
-                    </ul>
-                </div>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>Project OED</h2>
+                <p>오이디푸스적 비극을 기반으로 한 미스터리 어드벤처 게임. 2026년 출시 예정.</p>
             </div>
-            <div class="copyright">
-                <p class="retro-text" data-lang="ko">© 2025 Project OED. All rights reserved.</p>
-                <p class="retro-text" data-lang="en">© 2025 Project OED. All rights reserved.</p>
-                <p class="retro-text" data-lang="ja">© 2025 Project OED. All rights reserved.</p>
+            <div class="footer-links">
+                <h3>사이트맵</h3>
+                <ul>
+                    <li><a href="#about">프로젝트 소개</a></li>
+                    <li><a href="#team">팀 소개</a></li>
+                    <li><a href="#community">커뮤니티</a></li>
+                    <li><a href="https://birdsol1122.github.io/projectoed1122/" target="_blank">구인공고</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>연락처</h3>
+                <p>Email: contact@projectoed.com</p>
+                <p>Discord: Project OED</p>
             </div>
         </div>
     </footer>
     <script>
-        // 모바일 기기 감지
-        function isMobileDevice() {
+        // 다국어 지원 관련 코드
+        function isMobile() {
             return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
         }
 
-        // 터치 이벤트 최적화
-        let touchStartY = 0;
-        let touchEndY = 0;
-        const mobileThreshold = 50; // 스크롤 감지 임계값
-
-        document.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-
-        document.addEventListener('touchend', (e) => {
-            touchEndY = e.changedTouches[0].clientY;
-            handleSwipe();
-        }, { passive: true });
-
-        function handleSwipe() {
-            const diff = touchStartY - touchEndY;
-            if (Math.abs(diff) > mobileThreshold) {
-                // 스와이프 동작 처리
-                if (diff > 0) {
-                    // 위로 스와이프
-                    navLinks.classList.remove('active');
-                } else {
-                    // 아래로 스와이프
-                }
-            }
-        }
-
-        // 성능 최적화된 스크롤 이벤트
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    // 스크롤 기반 효과 처리
-                    if (window.scrollY > 100) {
-                        document.querySelector('header').classList.add('scrolled');
-                    } else {
-                        document.querySelector('header').classList.remove('scrolled');
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }, { passive: true });
-
-        // 음악 재생 관련
-        const cassetteBtn = document.getElementById('cassetteBtn');
-        const bgm = document.getElementById('bgm');
-        let isPlaying = false;
-
-        // 모바일에서 오디오 컨텍스트 최적화
-        let audioContext;
-        function initAudioContext() {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            }
-        }
-
-        function playBgm() {
-            initAudioContext();
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-            bgm.play();
-            cassetteBtn.classList.add('playing');
-            isPlaying = true;
-        }
-
-        function pauseBgm() {
-            bgm.pause();
-            cassetteBtn.classList.remove('playing');
-            isPlaying = false;
-        }
-
-        cassetteBtn.addEventListener('click', function() {
-            if (!isPlaying) {
-                playBgm();
-            } else {
-                pauseBgm();
-            }
-        });
-
-        // 모바일 메뉴 최적화
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navLinks.classList.toggle('active');
-        });
-
-        // 모바일에서 메뉴 외부 클릭시 닫기
-        document.addEventListener('click', (e) => {
-            if (navLinks.classList.contains('active') && !e.target.closest('.nav-links') && !e.target.closest('.mobile-menu-btn')) {
-                navLinks.classList.remove('active');
-            }
-        });
-
-        // 모바일에서 메뉴 항목 클릭시 자동으로 메뉴 닫기
-        navLinks.addEventListener('click', (e) => {
-            if (e.target.classList.contains('nav-link')) {
-                navLinks.classList.remove('active');
-            }
-        });
-
-        // 언어 선택 최적화
-        const languageBtn = document.querySelector('.language-btn');
-        const languageDropdown = document.querySelector('.language-dropdown');
-        const languageOptions = document.querySelectorAll('.language-option');
-
-        function switchLanguage(lang) {
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                el.style.display = 'none';
-            });
-            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
-                el.style.display = 'block';
-            });
-            document.querySelector('html').setAttribute('lang', lang);
-            try {
-                localStorage.setItem('preferredLanguage', lang);
-            } catch (e) {
-                console.warn('LocalStorage is not available');
-            }
-        }
-
-        // 이미지 지연 로딩
-        if ('loading' in HTMLImageElement.prototype) {
-            const images = document.querySelectorAll('img[loading="lazy"]');
-            images.forEach(img => {
-                img.src = img.dataset.src;
-            });
-        } else {
-            // 폴백 지연 로딩
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-            document.body.appendChild(script);
-        }
-
-        // 페이지 로드 최적화
-        document.addEventListener('DOMContentLoaded', function() {
-            // 기본 언어 설정
-            let lang = 'ko';
-            try {
-                const storedLang = localStorage.getItem('preferredLanguage');
-                if (storedLang) {
-                    lang = storedLang;
-                }
-            } catch (e) {
-                console.warn('LocalStorage is not available');
-            }
-            switchLanguage(lang);
-
-            // 모바일 환경 체크 및 최적화
-            if (isMobileDevice()) {
-                document.body.classList.add('mobile');
-                // 모바일에서 특정 애니메이션 비활성화
-                document.body.classList.add('reduce-motion');
-            }
-        });
-
-        // 성능 최적화된 리사이즈 이벤트
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                // 리사이즈 시 필요한 조정
-                if (window.innerWidth > 768) {
-                    navLinks.classList.remove('active');
-                }
-            }, 250);
-        }, { passive: true });
-
-        // 랜덤 글리치 효과
-        function applyRandomGlitch() {
-            const elements = document.querySelectorAll('.random-glitch');
+        function updateLanguage(lang) {
+            document.documentElement.lang = lang;
+            const elements = document.querySelectorAll('[data-lang]');
             elements.forEach(element => {
-                if (Math.random() < 0.01) { // 1% 확률로 글리치 발생
-                    element.classList.add('active');
-                    setTimeout(() => {
-                        element.classList.remove('active');
-                    }, 200);
-                }
-            });
-        }
-
-        // 주기적으로 랜덤 글리치 효과 적용
-        setInterval(applyRandomGlitch, 100);
-
-        // 언어 선택 및 상태 저장
-        languageBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            languageDropdown.classList.toggle('show');
-        });
-
-        // 드롭다운 외부 클릭시 닫기
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.language-selector')) {
-                languageDropdown.classList.remove('show');
-            }
-        });
-
-        languageOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const lang = option.getAttribute('data-lang-code');
-                switchLanguage(lang);
-                languageDropdown.classList.remove('show');
-                
-                // 언어 선택 상태 저장
-                try {
-                    localStorage.setItem('preferredLanguage', lang);
-                } catch (e) {
-                    console.warn('LocalStorage is not available');
-                }
-            });
-        });
-
-        // 저장된 언어 설정 불러오기
-        document.addEventListener('DOMContentLoaded', function() {
-            try {
-                const savedLang = localStorage.getItem('preferredLanguage');
-                if (savedLang) {
-                    switchLanguage(savedLang);
-                }
-            } catch (e) {
-                console.warn('LocalStorage is not available');
-            }
-
-            // 이미지에 플리커 효과 적용
-            document.querySelectorAll('.about-image img, .member-image img').forEach(img => {
-                img.classList.add('flicker');
-            });
-        });
-
-        // 스캔라인 효과 토글
-        let scanlinesEnabled = true;
-        const scanlines = document.querySelector('.scanlines');
-        
-        function toggleScanlines() {
-            if (scanlinesEnabled) {
-                scanlines.style.opacity = '0';
-            } else {
-                scanlines.style.opacity = '0.3';
-            }
-            scanlinesEnabled = !scanlinesEnabled;
-        }
-
-        // 주기적으로 스캔라인 토글
-        setInterval(toggleScanlines, 10000); // 10초마다 토글
-
-        // 모바일 메뉴 관련 스크립트
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const navLinks = document.querySelector('.nav-links');
-            const menuIcon = mobileMenuBtn.querySelector('i');
-            
-            // 메뉴 토글 함수
-            function toggleMenu() {
-                navLinks.classList.toggle('active');
-                if (navLinks.classList.contains('active')) {
-                    menuIcon.classList.remove('fa-bars');
-                    menuIcon.classList.add('fa-times');
-                    mobileMenuBtn.setAttribute('aria-label', '메뉴 닫기');
+                if (element.getAttribute('data-lang') === lang) {
+                    element.style.display = 'inline';
                 } else {
-                    menuIcon.classList.add('fa-bars');
-                    menuIcon.classList.remove('fa-times');
-                    mobileMenuBtn.setAttribute('aria-label', '메뉴 열기');
-                }
-            }
-
-            // 메뉴 버튼 클릭 이벤트
-            mobileMenuBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                toggleMenu();
-            });
-
-            // 메뉴 항목 클릭시 메뉴 닫기
-            navLinks.addEventListener('click', function(e) {
-                if (e.target.classList.contains('nav-link')) {
-                    toggleMenu();
+                    element.style.display = 'none';
                 }
             });
+        }
 
-            // 화면 외부 클릭시 메뉴 닫기
-            document.addEventListener('click', function(e) {
-                if (navLinks.classList.contains('active') && !e.target.closest('.nav-links') && !e.target.closest('.mobile-menu-btn')) {
-                    toggleMenu();
-                }
-            });
-
-            // 화면 크기 변경시 메뉴 상태 초기화
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
-                    toggleMenu();
-                }
-            });
+        // 페이지 로드 시 현재 언어에 맞게 표시
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentLang = document.documentElement.lang;
+            updateLanguage(currentLang);
         });
     </script>
 </body>
